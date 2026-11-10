@@ -1,0 +1,908 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lingkaran: Sudut, Busur, dan Juring</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Sora:wght@700;800&display=swap">
+<style>
+:root{--bg:#F2F5F9;--ink:#13233F;--mute:#51627C;--card:#fff;--line:#D5DDE8;--acc:#1D5FD6;--accI:#fff;--ok:#0B7F5F;--okB:#DDF4EC;--bad:#B8312A;--badB:#FBE4E2;--sec:#F2A33A;--soft:#E6EEFB;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A2B;--ink:#E8EEF8;--mute:#9DB0CB;--card:#17263B;--line:#2A3C55;--acc:#6FA3FF;--accI:#0F1A2B;--ok:#3CCB9E;--okB:#12382F;--bad:#FF8A80;--badB:#42201F;--soft:#1E3250}}
+:root[data-theme="dark"]{--bg:#0F1A2B;--ink:#E8EEF8;--mute:#9DB0CB;--card:#17263B;--line:#2A3C55;--acc:#6FA3FF;--accI:#0F1A2B;--ok:#3CCB9E;--okB:#12382F;--bad:#FF8A80;--badB:#42201F;--soft:#1E3250}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Lexend,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:18px 16px 0}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:1.45rem;line-height:1.25;margin:0 0 4px;font-weight:700}
+.sub{color:var(--mute);font-size:.9rem;margin:0 0 12px}
+nav{display:flex;gap:4px;overflow-x:auto;margin:0 -16px;padding:0 16px}
+nav button{flex:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--mute);font:500 .92rem Lexend,system-ui,sans-serif;padding:10px 12px;cursor:pointer}
+nav button[aria-selected=true]{color:var(--acc);border-color:var(--acc)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+main{padding:20px 16px 48px}
+section[hidden]{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+h2{font-size:1.15rem;margin:0 0 8px}
+h3{font-size:1rem;margin:14px 0 4px}
+p{margin:6px 0}
+.f{background:var(--soft);border-radius:8px;padding:10px 14px;margin:10px 0;font-weight:500;overflow-x:auto;white-space:nowrap}
+.ex{border-left:4px solid var(--sec);padding:2px 0 2px 12px;margin:12px 0}
+.mute{color:var(--mute);font-size:.9rem}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+label{font-weight:500;font-size:.9rem;display:block}
+input[type=range]{width:100%;accent-color:var(--acc)}
+select,input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.btn{background:var(--acc);color:var(--accI);border:0;border-radius:8px;padding:9px 16px;font:500 .95rem Lexend,system-ui,sans-serif;cursor:pointer}
+.btn.alt{background:var(--soft);color:var(--ink)}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.res div{background:var(--soft);border-radius:8px;padding:8px 12px;font-size:.88rem}
+.res b{display:block;font-size:1.15rem}
+svg{width:100%;max-width:340px;display:block;margin:0 auto}
+svg text{fill:var(--ink);font:500 13px Lexend,system-ui,sans-serif}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.cols{gap:6px}}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0;font:inherit;cursor:pointer}
+.opt.sel{border-color:var(--acc);background:var(--soft)}
+.opt.ok{border-color:var(--ok);background:var(--okB)}
+.opt.bad{border-color:var(--bad);background:var(--badB)}
+.opt:disabled{cursor:default}
+.fb{margin-top:8px;padding:8px 12px;border-radius:8px;font-size:.92rem}
+.fb.ok{background:var(--okB);color:var(--ok)}.fb.bad{background:var(--badB);color:var(--bad)}
+.score{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:6px 0 10px;display:flex;justify-content:space-between;align-items:center;z-index:5;font-weight:500}
+.q{font-weight:500;margin-bottom:6px}
+@media(prefers-reduced-motion:no-preference){.opt{transition:background .15s,border-color .15s}}
+body{background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px}
+body::before{background:#0B1437}
+header{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 0,#22D3EE55,transparent 45%),linear-gradient(135deg,#0B1437 0%,#2A1B7A 55%,#6B3FE0 100%);border:0;padding:30px 16px 0;color:#fff}
+header .wrap{position:relative;z-index:1}
+h1,h2{font-family:Sora,Lexend,system-ui,sans-serif}
+h1{font-size:clamp(1.7rem,6.5vw,2.5rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:10px 0 8px}
+.sub{color:#C9D2FF;max-width:520px;margin-bottom:18px}
+.deco{position:absolute;right:-50px;top:-50px;width:240px;max-width:none;opacity:.5;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chip{display:inline-block;background:#FFFFFF22;border:1px solid #FFFFFF44;border-radius:99px;padding:3px 14px;font-weight:500;font-size:.9rem;backdrop-filter:blur(6px)}
+nav{gap:6px;padding-bottom:14px}
+nav button{border:0;border-radius:99px;color:#E3E8FF;background:#FFFFFF14;padding:8px 14px}
+nav button[aria-selected=true]{background:#fff;color:#2A1B7A;font-weight:700;box-shadow:0 4px 14px #0006}
+.card{border:0;border-radius:20px;box-shadow:0 10px 32px #2a1b7a1f;position:relative;overflow:hidden;padding:20px 20px 20px 24px}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(#7C5CFF,#22D3EE)}
+.card:nth-of-type(3n+2)::before{background:linear-gradient(#FFB547,#FF5C8A)}
+.card:nth-of-type(3n)::before{background:linear-gradient(#22D3EE,#19C79A)}
+.f{background:linear-gradient(135deg,#2A1B7A,#6B3FE0);color:#fff;text-align:center;font-size:1.05rem;padding:14px;border-radius:14px;box-shadow:0 6px 18px #6b3fe055}
+.ex{background:#FFB54722;border-left:4px solid #FFB547;border-radius:0 12px 12px 0;padding:10px 14px}
+.btn{background:linear-gradient(135deg,#7C5CFF,#22A9E8);color:#fff;border-radius:99px;padding:10px 20px;box-shadow:0 6px 16px #7c5cff55}
+.btn.alt{background:var(--soft);color:var(--ink);box-shadow:none}
+.btn:not(:disabled):hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.5;cursor:default}
+.opt{border-radius:14px;border-width:2px;padding:12px 14px}
+.opt:not(:disabled):hover{border-color:var(--acc);transform:translateY(-1px)}
+.opt.ok::after{content:" ✓";font-weight:700}
+.opt.bad::after{content:" ✕";font-weight:700}
+.score{background:var(--card);border-radius:99px;padding:8px 18px;box-shadow:0 6px 20px #2a1b7a26;margin-bottom:12px;top:calc(env(safe-area-inset-top,0px) + 8px)}
+.res div{border-top:4px solid #7C5CFF;border-radius:10px}
+.res div:nth-child(2){border-color:#22D3EE}.res div:nth-child(3){border-color:#FF5C8A}.res div:nth-child(4){border-color:#FFB547}
+#viz,#materi svg{background:#0B1437;border-radius:18px;padding:8px;box-shadow:0 10px 28px #0b143755}
+#viz text,#materi svg text{fill:#fff}
+#viz [stroke="var(--ink)"],#materi svg [stroke="var(--ink)"]{stroke:#fff}
+#viz [stroke="var(--acc)"],#materi svg [stroke="var(--acc)"]{stroke:#22D3EE}
+#viz circle[fill="var(--ink)"],#materi circle[fill="var(--ink)"]{fill:#fff}
+#viz [stroke="var(--bad)"]{stroke:#FF5C8A}
+.cf{position:fixed;top:-30px;z-index:50;pointer-events:none;font-size:24px;animation:fall 2.2s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--x),105vh) rotate(540deg)}}
+@media(prefers-reduced-motion:reduce){.cf{display:none}.deco{animation:none}.btn,.opt{transition:none}}
+@media(prefers-reduced-motion:no-preference){.btn,.opt{transition:transform .15s,background .15s,border-color .15s}}
+math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math,serif;font-size:1.18em}
+.f math{font-size:1.4em}
+.m{display:block;margin:8px 0;font-size:1.05em}
+#eq{text-align:center;margin-top:14px}
+#eq math{display:block;margin:6px 0}
+.tag{display:inline-block;font-size:.75rem;font-weight:500;padding:1px 10px;border-radius:99px;background:var(--soft);color:var(--acc);margin:0 6px 4px 0}
+.card .row{margin-top:6px}
+.dock{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.dock .bt{width:50px;height:50px;border-radius:50%;border:0;font-size:1.35rem;cursor:pointer;background:linear-gradient(135deg,#7C5CFF,#22A9E8);color:#fff;box-shadow:0 8px 20px #2a1b7a66}
+.dock .bt.sm{width:38px;height:38px;font-size:1rem;background:var(--card);color:var(--ink);box-shadow:0 6px 16px #0003}
+.dock .bt.on{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px #7C5CFF33}}
+.mpanel{background:var(--card);border-radius:16px;padding:12px 14px;box-shadow:0 10px 28px #0004;width:230px;display:none}
+.mpanel.open{display:block}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#13233F;color:#fff;padding:10px 18px;border-radius:99px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.bar{height:14px;background:var(--soft);border-radius:99px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#19C79A,#22D3EE);border-radius:99px;transition:width .5s}
+.gh{display:flex;gap:14px;align-items:center}
+.bub{background:var(--soft);border-radius:16px;padding:10px 14px;font-size:.95rem;flex:1}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.stats span{background:var(--soft);border-radius:99px;padding:3px 12px;font-size:.85rem;font-weight:500}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bdg{background:var(--soft);border-radius:12px;padding:8px 10px;font-size:.82rem;opacity:.5;border:2px solid transparent}
+.bdg.on{opacity:1;border-color:#FFB547}
+.pop{animation:pop .8s ease-out;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.bob{animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;margin-top:10px}
+.gal figure{margin:0;background:var(--soft);border-radius:16px;padding:12px 8px 10px;text-align:center}
+.gal figcaption{font-size:.8rem;line-height:1.35;margin-top:6px}
+#materi svg.il{background:none;box-shadow:none;padding:0;max-width:100px}
+@media(prefers-reduced-motion:reduce){.dock .bt.on,.bob,.pop{animation:none}.toast,.bar i{transition:none}}
+.wrap{max-width:900px}
+@media(min-width:900px){nav{flex-wrap:wrap;overflow:visible}}
+h1{font-size:clamp(1.3rem,4.5vw,1.9rem)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center;background:linear-gradient(135deg,#0B1437,#2A1B7A 60%,#6B3FE0);color:#fff;padding:28px 28px 28px 32px}
+.hero::before{display:none}
+.hero-h{font:800 clamp(2rem,7vw,3.1rem)/1.05 Sora,Lexend,sans-serif;margin:8px 0 10px;letter-spacing:-.02em;color:#fff}
+.hero p{color:#D6DCFF}
+.eyebrow{display:inline-block;background:#FFFFFF1f;border:1px solid #FFFFFF44;border-radius:99px;padding:2px 12px;font-size:.8rem}
+.hero-art{max-width:250px}
+.spin{transform-origin:100px 100px;animation:spin 14s linear infinite}
+@media(max-width:620px){.hero{grid-template-columns:1fr;padding:22px}.hero-art{max-width:170px;order:-1}}
+.steps{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;counter-reset:s}
+.steps li{background:var(--soft);border-radius:16px;padding:14px 12px 12px;counter-increment:s;position:relative;font-size:.88rem}
+.steps li::before{content:counter(s);position:absolute;top:-9px;left:-6px;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7C5CFF,#22A9E8);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.goals{margin:8px 0 0;padding:0;list-style:none}
+.goals li{padding:6px 0 6px 30px;position:relative}
+.goals li::before{content:"\1F3AF";position:absolute;left:0}
+.seg{display:flex;gap:4px;background:var(--soft);border-radius:99px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;border-radius:99px;padding:8px 6px;font:500 .85rem Lexend,system-ui,sans-serif;color:var(--mute);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--acc);box-shadow:0 2px 8px #0002;font-weight:700}
+.sim{background:#0B1437;border-radius:18px;padding:8px;box-shadow:0 10px 28px #0b143755}
+svg.sim text{fill:#fff}
+.tb{display:flex;align-items:center;gap:8px;font-size:.88rem;margin:6px 0}
+.tb .l{width:96px;flex:none}
+.tb .bar{flex:1;margin:0}
+.cert{max-width:100%;width:100%;border-radius:12px;box-shadow:0 10px 28px #0003;margin:10px 0}
+.reveal{animation:rv .5s ease-out both}
+@keyframes rv{from{opacity:0;transform:translateY(10px)}}
+@media(prefers-reduced-motion:reduce){.spin,.reveal{animation:none}}
+#ceq math,#geq math,#rle math,#eq math{font-size:1.05em}
+.f{overflow-x:auto}
+.ex,.fb{overflow-x:auto}
+.cheer{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;align-items:center;gap:8px;background:var(--card);color:var(--ink);border-radius:18px;padding:6px 14px 6px 8px;box-shadow:0 10px 28px #0004;max-width:min(300px,calc(100vw - 90px));transform:translateY(140%);opacity:0;transition:transform .3s,opacity .3s;font-size:.88rem;font-weight:500;pointer-events:none}
+.cheer.show{transform:none;opacity:1}
+.cheer svg{flex:none;margin:0;width:46px;height:50px;max-width:none}
+svg.lab{touch-action:none;cursor:grab;padding:0;max-width:560px;display:block;margin:0 auto}
+.ltab{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px}
+.ltab th,.ltab td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+.ltab th{color:var(--mute);font-weight:500}
+.lsteps{padding-left:20px;margin:6px 0}
+.lctl label{margin-top:8px}
+#lseg{flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){.cheer{transition:none}}
+.cptab th,.cptab td{text-align:left;white-space:normal;vertical-align:top}
+.foot{text-align:center;color:var(--mute);font-size:.82rem;margin:24px 0 70px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<svg class="deco" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="90" fill="none" stroke="#22D3EE" stroke-width="3"/><circle cx="100" cy="100" r="55" fill="none" stroke="#fff" stroke-opacity=".4" stroke-dasharray="4 6"/><path d="M100 100 L190 100 A90 90 0 0 0 163.6 36.4 Z" fill="#FFB547" opacity=".7"/><circle cx="163.6" cy="36.4" r="6" fill="#FF5C8A"/></svg><button type="button" class="chip" id="chip" style="font:500 .9rem Lexend,system-ui,sans-serif;color:#fff;cursor:pointer" aria-label="Buka kebun">🌱 0/53</button><h1>Lingkaran: Sudut, Busur, dan Juring</h1>
+<p class="sub">Media pembelajaran interaktif Matematika: materi, simulasi, latihan, ujian akhir, dan kebun tanaman.</p>
+<nav role="tablist" id="tabs"></nav>
+</div></header>
+<main><div class="wrap">
+
+<section id="beranda">
+<div class="card hero"><div><span class="eyebrow">Matematika · Fase F · SMAN 4 Medan</span><h2 class="hero-h">Taklukkan Lingkaran!</h2><p>Jelajahi sudut pusat, sudut keliling, busur, juring, tali busur, lingkaran dalam dan luar segitiga, garis singgung, teorema lingkaran, sampai jarak antar kota di permukaan Bumi. Jawab soal dengan benar untuk menumbuhkan kebunmu.</p><div class="row"><button class="btn" data-go="materi" type="button">🚀 Mulai belajar</button><button class="btn alt" data-go="kebun" type="button">🌱 Lihat kebunku</button></div></div>
+<svg class="hero-art" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="86" fill="#FFFFFF10" stroke="#22D3EE" stroke-width="3"/><circle cx="100" cy="100" r="58" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="4 6"/><g class="spin"><path d="M100 100 L186 100 A86 86 0 0 0 143 25.5 Z" fill="#FFB547" fill-opacity=".85"/><circle cx="143" cy="25.5" r="7" fill="#FF5C8A"/><circle cx="186" cy="100" r="7" fill="#22D3EE"/></g><circle cx="100" cy="100" r="5" fill="#fff"/></svg></div>
+<div class="card"><label for="nm">Siapa namamu?</label><div class="row"><input type="text" id="nm" maxlength="30" placeholder="Nama lengkap" autocomplete="name"><button class="btn" id="nmok" type="button">Simpan</button></div><p id="hi" class="mute"></p></div>
+<div class="card"><h2>🤔 Pemantik</h2><p>Roda berjari-jari 21 cm berputar sebesar sudut tertentu. Seberapa jauh roda itu bergerak? Geser untuk menjawab rasa penasaranmu.</p>
+<svg viewBox="0 0 300 125" class="sim" id="rls" role="img" aria-label="Roda berputar di atas jalan"><line x1="10" y1="100" x2="290" y2="100" stroke="#5B6B99" stroke-width="3"/><line id="rlt" x1="44" y1="100" x2="44" y2="100" stroke="#FF5C8A" stroke-width="6" stroke-linecap="round"/><g id="rlw"><circle r="30" fill="#17306B" stroke="#22D3EE" stroke-width="3"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(0)"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(60)"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(120)"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(180)"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(240)"/><line x2="0" y2="-30" stroke="#5B7BD6" stroke-width="1.5" transform="rotate(300)"/><circle cy="-30" r="4.5" fill="#FF5C8A"/></g><line x1="44" y1="104" x2="44" y2="116" stroke="#FFB547" stroke-width="3"/></svg>
+<label for="rl">Sudut putar roda: <span id="rlv"></span>°</label><input type="range" id="rl" min="0" max="360" step="5" value="90"><div class="f" id="rle" style="white-space:normal"></div>
+<p class="mute">Jarak yang ditempuh sama dengan panjang busur. Itulah inti materi ini.</p></div>
+<div class="card"><h2>Capaian pembelajaran</h2>
+<div class="stats"><span>Matematika</span><span>Fase F</span><span>Elemen: Geometri</span><span>Materi: Lingkaran</span></div>
+<p><b>Capaian Pembelajaran (CP) Fase F, elemen Geometri:</b> Di akhir Fase F, peserta didik dapat menerapkan teorema tentang lingkaran, dan menentukan panjang busur dan luas juring lingkaran untuk menyelesaikan masalah (termasuk menentukan lokasi posisi pada permukaan Bumi dan jarak antara dua tempat di Bumi).</p>
+<div style="overflow-x:auto"><table class="ltab cptab"><tr><th>Indikator</th><th>Dipelajari lewat</th><th>Diukur lewat</th></tr>
+<tr><td>Menjelaskan hubungan sudut pusat dan sudut keliling</td><td>Materi 1, Lab 1</td><td>Latihan, Bank soal (Sudut)</td></tr>
+<tr><td>Menghitung panjang busur dan luas juring</td><td>Materi 2 dan 3, Pemantik, Lab 2</td><td>Latihan, Bank soal (Busur, Juring)</td></tr>
+<tr><td>Menentukan panjang tali busur</td><td>Materi 4, Eksplorasi</td><td>Bank soal (Tali busur)</td></tr>
+<tr><td>Menentukan jari-jari lingkaran dalam dan luar segitiga</td><td>Materi 5, Lab 4</td><td>Bank soal (Segitiga)</td></tr>
+<tr><td>Menghitung panjang garis singgung</td><td>Materi 6, Eksplorasi, Lab 3</td><td>Bank soal (Singgung)</td></tr>
+<tr><td>Menerapkan teorema tentang lingkaran (segiempat tali busur, sudut garis singgung dan tali busur)</td><td>Materi 8</td><td>Bank soal (Teorema)</td></tr>
+<tr><td>Menentukan lokasi (lintang dan bujur) serta jarak dua tempat di permukaan Bumi</td><td>Materi 7, Lab 5</td><td>Bank soal (Jarak di Bumi)</td></tr>
+<tr><td>Menyelesaikan masalah kontekstual</td><td>Galeri ilustrasi, soal cerita</td><td>Bank soal (Kontekstual), Ujian akhir</td></tr></table></div></div>
+<div class="card"><h2>Tujuan pembelajaran</h2><p>Setelah belajar, kamu dapat:</p><ul class="goals"><li>Menentukan hubungan sudut pusat dan sudut keliling.</li><li>Menghitung panjang busur, luas juring, dan panjang tali busur.</li><li>Menentukan jari-jari lingkaran dalam dan lingkaran luar segitiga.</li><li>Menghitung panjang garis singgung lingkaran.</li><li>Menerapkan teorema segiempat tali busur serta sudut antara garis singgung dan tali busur.</li><li>Menentukan lokasi pada permukaan Bumi (lintang dan bujur) dan jarak dua tempat dengan busur lingkaran besar.</li><li>Menyelesaikan masalah kontekstual dengan konsep-konsep tersebut.</li></ul></div>
+<div class="card"><h2>Alur belajar</h2><ol class="steps"><li><b>Pahami</b><br>Baca materi dan lihat ilustrasinya.</li><li><b>Eksplorasi</b><br>Geser simulasi dan lakukan percobaan di Lab maya.</li><li><b>Latihan</b><br>Menjodohkan, isian, dan pilihan ganda.</li><li><b>Uji</b><br>Bank soal dan ujian akhir.</li><li><b>Panen</b><br>Kebun mekar, dapatkan sertifikat.</li></ol></div>
+<div class="card"><h2>Petunjuk singkat</h2><p>🎵 Tombol di kanan bawah memutar musik dan mengatur volume. 🌓 mengganti tema terang atau gelap. 💧 Setiap jawaban benar yang baru menyiram kebunmu. 🧪 Lab maya melatihmu menemukan rumus lewat percobaan. 🏆 Nilai ujian akhir 70 ke atas membuka sertifikat.</p></div>
+<div class="card" id="dev" hidden></div>
+</section>
+<section id="materi" hidden>
+<div class="card"><h2>Unsur yang dipakai</h2>
+<p>Sebuah lingkaran berpusat di O dengan jari-jari <b>r</b>. Titik A dan B pada lingkaran membentuk <b>busur</b> AB. Kita membandingkan busur itu dengan keliling dan luas seluruh lingkaran.</p>
+<svg viewBox="0 0 300 260" role="img" aria-label="Lingkaran dengan sudut pusat AOB dan sudut keliling APB menghadap busur AB">
+<circle cx="150" cy="130" r="100" fill="none" stroke="var(--acc)" stroke-width="2"/>
+<path d="M150 130 L236.6 80 A100 100 0 0 1 236.6 180 Z" fill="#FFB547" opacity=".78"/>
+<path d="M50 130 L236.6 80 M50 130 L236.6 180 M150 130 L236.6 80 M150 130 L236.6 180" stroke="var(--ink)" stroke-width="1.5" fill="none"/>
+<circle cx="150" cy="130" r="3" fill="var(--ink)"/>
+<text x="138" y="148">O</text><text x="242" y="78">A</text><text x="242" y="192">B</text><text x="30" y="134">P</text>
+<text x="168" y="134">2x</text><text x="76" y="134">x</text>
+</svg>
+<p class="mute">∠AOB = sudut pusat (2x). ∠APB = sudut keliling (x). Daerah berwarna = juring AOB.</p></div>
+
+<div class="card"><h2>Lingkaran di sekitar kita</h2><p>Lihat bagaimana konsep lingkaran muncul dalam kehidupan sehari-hari.</p><div class="gal"><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#E8903A"/><circle cx="50" cy="50" r="34" fill="#FFC857"/><circle cx="36" cy="38" r="6" fill="#E0524D"/><circle cx="62" cy="34" r="5.5" fill="#E0524D"/><circle cx="66" cy="60" r="6" fill="#E0524D"/><circle cx="40" cy="64" r="5.5" fill="#E0524D"/><circle cx="52" cy="50" r="4" fill="#E0524D"/><path d="M50 50 L56.95 10.61 A40 40 0 0 1 82.77 27.06 Z" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="2"/></svg><figcaption><b>Pizza</b><br>potongan = juring</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="36" fill="none" stroke="#2B3A67" stroke-width="6"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(0 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(30 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(60 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(90 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(120 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(150 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(180 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(210 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(240 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(270 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(300 50 50)"/><line x1="50" y1="50" x2="50" y2="16" stroke="#8A97B8" stroke-width="1.5" transform="rotate(330 50 50)"/><circle cx="50" cy="50" r="6" fill="#FF5C8A"/><path d="M62.31 16.17 A36 36 0 0 1 86.0 50.0" fill="none" stroke="#FF5C8A" stroke-width="6" stroke-linecap="round"/></svg><figcaption><b>Roda sepeda</b><br>lintasan = busur</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="#fff" stroke="#7C5CFF" stroke-width="6"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(0 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(30 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(60 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(90 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(120 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(150 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(180 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(210 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(240 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(270 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(300 50 50)"/><line x1="50" y1="16" x2="50" y2="21" stroke="#2B3A67" stroke-width="2" transform="rotate(330 50 50)"/><path d="M50 50 L50 24 A26 26 0 0 1 76 50 Z" fill="#FFB547" fill-opacity=".6"/><line x1="50" y1="50" x2="50" y2="22" stroke="#2B3A67" stroke-width="3" stroke-linecap="round"/><line x1="50" y1="50" x2="68" y2="50" stroke="#FF5C8A" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="#2B3A67"/></svg><figcaption><b>Jam dinding</b><br>sudut jarum = sudut pusat</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 44 L30 92 M50 44 L70 92" stroke="#2B3A67" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="44" r="30" fill="none" stroke="#22D3EE" stroke-width="3"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(0 50 44)"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(60 50 44)"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(120 50 44)"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(180 50 44)"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(240 50 44)"/><line x1="50" y1="44" x2="50" y2="14" stroke="#8A97B8" stroke-width="1.5" transform="rotate(300 50 44)"/><rect x="75.0" y="39.5" width="10" height="9" rx="3" fill="#FF5C8A"/><rect x="60.0" y="65.48" width="10" height="9" rx="3" fill="#FFB547"/><rect x="30.0" y="65.48" width="10" height="9" rx="3" fill="#19C79A"/><rect x="15.0" y="39.5" width="10" height="9" rx="3" fill="#22D3EE"/><rect x="30.0" y="13.52" width="10" height="9" rx="3" fill="#7C5CFF"/><rect x="60.0" y="13.52" width="10" height="9" rx="3" fill="#FF8A3D"/><circle cx="50" cy="44" r="4" fill="#2B3A67"/></svg><figcaption><b>Bianglala</b><br>keliling dan sudut</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><rect x="4" y="18" width="92" height="68" rx="12" fill="#DDF2FF" stroke="#2B3A67" stroke-width="4"/><path d="M50 82 L4.97 56.0 A52 52 0 0 1 95.03 56.0 Z" fill="#22D3EE" fill-opacity=".45"/><line x1="50" y1="82" x2="50" y2="32" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="82" r="4" fill="#FF5C8A"/></svg><figcaption><b>Wiper mobil</b><br>daerah sapuan = juring</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 78 L4.97 52.0 A52 52 0 0 1 95.03 52.0 Z" fill="#22D3EE" fill-opacity=".35"/><circle cx="35.86" cy="63.86" r="2" fill="#22A9E8"/><circle cx="43.16" cy="59.21" r="2" fill="#22A9E8"/><circle cx="50.0" cy="58.0" r="2" fill="#22A9E8"/><circle cx="56.84" cy="59.21" r="2" fill="#22A9E8"/><circle cx="64.14" cy="63.86" r="2" fill="#22A9E8"/><circle cx="25.96" cy="53.96" r="2" fill="#22A9E8"/><circle cx="38.37" cy="46.05" r="2" fill="#22A9E8"/><circle cx="50.0" cy="44.0" r="2" fill="#22A9E8"/><circle cx="61.63" cy="46.05" r="2" fill="#22A9E8"/><circle cx="74.04" cy="53.96" r="2" fill="#22A9E8"/><circle cx="17.47" cy="45.47" r="2" fill="#22A9E8"/><circle cx="34.27" cy="34.77" r="2" fill="#22A9E8"/><circle cx="50.0" cy="32.0" r="2" fill="#22A9E8"/><circle cx="65.73" cy="34.77" r="2" fill="#22A9E8"/><circle cx="82.53" cy="45.47" r="2" fill="#22A9E8"/><rect x="0" y="84" width="100" height="16" fill="#46C98A"/><rect x="45" y="74" width="10" height="12" rx="3" fill="#2B3A67"/></svg><figcaption><b>Sprinkler</b><br>area siraman = juring</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><circle cx="30" cy="55" r="22" fill="#E6EEFB" stroke="#2B3A67" stroke-width="4"/><circle cx="75" cy="55" r="10" fill="#E6EEFB" stroke="#2B3A67" stroke-width="4"/><path d="M35.87 33.80 L77.67 45.36 M35.87 76.20 L77.67 64.64" stroke="#FF5C8A" stroke-width="3.5" stroke-linecap="round"/><circle cx="30" cy="55" r="4" fill="#2B3A67"/><circle cx="75" cy="55" r="3" fill="#2B3A67"/></svg><figcaption><b>Sabuk roda</b><br>garis singgung persekutuan</figcaption></figure><figure><svg class="il" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="36" fill="#22D3EE22" stroke="#22D3EE" stroke-width="3"/><ellipse cx="50" cy="50" rx="36" ry="12" fill="none" stroke="#2B3A67" stroke-width="1.5"/><ellipse cx="50" cy="50" rx="14" ry="36" fill="none" stroke="#2B3A67" stroke-width="1.5"/><path d="M30 34A36 36 0 0 1 72 70" fill="none" stroke="#FF5C8A" stroke-width="3.5" stroke-linecap="round"/><circle cx="30" cy="34" r="4" fill="#FFB547"/><circle cx="72" cy="70" r="4" fill="#FFB547"/></svg><figcaption><b>Globe</b><br>jarak antar kota</figcaption></figure></div></div>
+<div class="card"><h2>1. Sudut pusat dan sudut keliling</h2>
+<p>Sudut pusat titik sudutnya di pusat lingkaran. Sudut keliling titik sudutnya di keliling lingkaran. Jika keduanya menghadap busur yang sama:</p>
+<div class="f"><math display="block"><mrow><mo>∠</mo><mi mathvariant="normal">AOB</mi></mrow><mo>=</mo><mn>2</mn><mo>×</mo><mrow><mo>∠</mo><mi mathvariant="normal">APB</mi></mrow></math></div>
+<p>Akibatnya: (a) sudut keliling yang menghadap busur sama besarnya sama; (b) sudut keliling yang menghadap diameter selalu 90°.</p><svg viewBox="0 0 300 220" role="img" aria-label="Sudut keliling APB menghadap diameter AB sebesar 90 derajat"><circle cx="110" cy="110" r="80" fill="none" stroke="var(--acc)" stroke-width="2"/><path d="M30 110L190 110M30 110L82.6 34.8M190 110L82.6 34.8" stroke="var(--ink)" stroke-width="1.5" fill="none"/><path d="M74.6 46.3L86 54.3L94.1 42.8" stroke="#FFB547" stroke-width="2" fill="none"/><circle cx="110" cy="110" r="3" fill="var(--ink)"/><text x="12" y="114">A</text><text x="196" y="114">B</text><text x="76" y="28">P</text><text x="104" y="128">O</text><text x="96" y="80" style="fill:#FFB547">90°</text><text x="212" y="60" style="fill:#FFB547">∠APB = 90°</text><text x="212" y="84">AB = diameter</text></svg></div>
+
+<div class="card"><h2>2. Panjang busur</h2>
+<p>Panjang busur sebanding dengan sudut pusatnya.</p>
+<div class="f"><math display="block"><mtext>Panjang busur </mtext><mo>=</mo><mfrac><mi>θ</mi><mrow><mn>360</mn><mo>°</mo></mrow></mfrac><mo>×</mo><mn>2</mn><mi>π</mi><mi>r</mi></math></div><svg viewBox="0 0 300 220" role="img" aria-label="Busur AB pada sudut pusat θ"><circle cx="110" cy="110" r="80" fill="none" stroke="var(--acc)" stroke-width="2"/><path d="M110 110L179.3 70M110 110L179.3 150" stroke="var(--ink)" stroke-width="1.5"/><path d="M179.3 70A80 80 0 0 1 179.3 150" fill="none" stroke="#FF5C8A" stroke-width="5"/><circle cx="110" cy="110" r="3" fill="var(--ink)"/><text x="94" y="128">O</text><text x="184" y="66">A</text><text x="184" y="162">B</text><text x="128" y="114">θ</text><text x="146" y="86">r</text><text x="204" y="114" style="fill:#FF5C8A">busur AB</text></svg>
+<div class="ex"><b>Contoh.</b> Roda berjari-jari 21 cm berputar 60°. Titik di tepi roda menempuh:<span class="m">60/360 × 2 × 22/7 × 21 = 22 cm</span></div></div>
+
+<div class="card"><h2>3. Luas juring</h2>
+<p>Juring adalah daerah yang dibatasi dua jari-jari dan satu busur.</p>
+<div class="f"><math display="block"><mtext>Luas juring </mtext><mo>=</mo><mfrac><mi>θ</mi><mrow><mn>360</mn><mo>°</mo></mrow></mfrac><mo>×</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup></math></div><svg viewBox="0 0 300 220" role="img" aria-label="Juring AOB"><circle cx="110" cy="110" r="80" fill="none" stroke="var(--acc)" stroke-width="2"/><path d="M110 110L179.3 70A80 80 0 0 1 179.3 150Z" fill="#FFB547" fill-opacity=".65" stroke="var(--ink)" stroke-width="1.5"/><circle cx="110" cy="110" r="3" fill="var(--ink)"/><text x="94" y="128">O</text><text x="184" y="66">A</text><text x="184" y="162">B</text><text x="128" y="114">θ</text><text x="146" y="86">r</text><text x="204" y="114" style="fill:#FFB547">juring AOB</text></svg>
+<div class="ex"><b>Contoh.</b> Pizza berjari-jari 14 cm dipotong juring 90°. Luasnya:<span class="m">90/360 × 22/7 × 14² = 154 cm²</span></div></div>
+
+<div class="card"><h2>4. Tali busur</h2>
+<p>Tali busur adalah ruas garis yang menghubungkan dua titik pada lingkaran. Tali busur terpanjang adalah diameter. Garis dari pusat yang tegak lurus tali busur membagi tali busur menjadi dua sama panjang.</p>
+<div class="f"><math display="block"><mtext>Tali busur </mtext><mo>=</mo><mn>2</mn><mo>×</mo><msqrt><msup><mi>r</mi><mn>2</mn></msup><mo>−</mo><msup><mi>d</mi><mn>2</mn></msup></msqrt></math></div>
+<p class="mute">d = jarak pusat ke tali busur.</p>
+<svg viewBox="0 0 300 220" role="img" aria-label="Tali busur AB dengan jarak d dari pusat"><circle cx="110" cy="110" r="80" fill="none" stroke="var(--acc)" stroke-width="2"/><path d="M46 62L174 62" stroke="#FF5C8A" stroke-width="4"/><path d="M110 110L110 62M110 110L46 62" stroke="var(--ink)" stroke-width="1.5"/><path d="M110 70L118 70L118 62" stroke="#FFB547" stroke-width="2" fill="none"/><circle cx="110" cy="110" r="3" fill="var(--ink)"/><text x="98" y="128">O</text><text x="26" y="58">A</text><text x="180" y="58">B</text><text x="104" y="50">M</text><text x="114" y="92">d</text><text x="68" y="94">r</text><text x="200" y="66" style="fill:#FF5C8A">tali busur AB</text></svg>
+<div class="ex"><b>Contoh.</b> r = 13 cm dan d = 5 cm. Setengah tali busur = √(169 − 25) = 12, jadi tali busur = <b>24 cm</b>.</div></div>
+<div class="card"><h2>5. Lingkaran dalam dan lingkaran luar segitiga</h2>
+<p>Lingkaran dalam menyinggung ketiga sisi segitiga, pusatnya di titik potong garis bagi sudut. Lingkaran luar melalui ketiga titik sudut, pusatnya di titik potong garis sumbu sisi.</p>
+<div class="f"><math display="block"><msub><mi>r</mi><mtext>dalam</mtext></msub><mo>=</mo><mfrac><mi>L</mi><mi>s</mi></mfrac><mspace width="2em"/><msub><mi>R</mi><mtext>luar</mtext></msub><mo>=</mo><mfrac><mrow><mi>a</mi><mi>b</mi><mi>c</mi></mrow><mrow><mn>4</mn><mi>L</mi></mrow></mfrac></math></div>
+<p class="mute">L = luas segitiga, s = setengah keliling. Pada segitiga siku-siku: r dalam = (a + b − c) : 2 dan R luar = c : 2 (c = sisi miring).</p>
+<svg viewBox="0 0 300 240" role="img" aria-label="Segitiga siku-siku dengan lingkaran dalam dan lingkaran luar"><circle cx="120" cy="120" r="108.2" fill="none" stroke="#22D3EE" stroke-width="2" stroke-dasharray="6 4"/><circle cx="71.8" cy="138.2" r="41.8" fill="#FFB547" fill-opacity=".25" stroke="#FFB547" stroke-width="2"/><path d="M30 180L210 180L30 60Z" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="10" y="196">A</text><text x="214" y="196">B</text><text x="12" y="58">C</text><text x="190" y="30" style="fill:#22D3EE">lingkaran luar</text><text x="190" y="50" style="fill:#FFB547">lingkaran dalam</text></svg>
+<div class="ex"><b>Contoh.</b> Segitiga siku-siku 6, 8, 10 cm: r dalam = (6 + 8 − 10) : 2 = <b>2 cm</b>, R luar = 10 : 2 = <b>5 cm</b>.</div></div>
+<div class="card"><h2>6. Garis singgung lingkaran</h2>
+<p>Garis singgung menyentuh lingkaran di satu titik dan <b>tegak lurus</b> jari-jari di titik singgung. Dua garis singgung dari satu titik luar sama panjang.</p>
+<div class="f"><math display="block"><mtext>Singgung </mtext><mo>=</mo><msqrt><msup><mi>d</mi><mn>2</mn></msup><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></msqrt></math></div>
+<svg viewBox="0 0 300 220" role="img" aria-label="Garis singgung PT dari titik P di luar lingkaran"><circle cx="100" cy="120" r="60" fill="none" stroke="var(--acc)" stroke-width="2"/><path d="M100 120L260 120M100 120L122.5 64.4" stroke="var(--ink)" stroke-width="1.5"/><path d="M122.5 64.4L260 120" stroke="#FF5C8A" stroke-width="3.5"/><path d="M118 75.5L129.1 80L133.6 68.9" stroke="#FFB547" stroke-width="2" fill="none"/><circle cx="100" cy="120" r="3" fill="var(--ink)"/><text x="88" y="138">O</text><text x="116" y="54">T</text><text x="264" y="124">P</text><text x="102" y="94">r</text><text x="170" y="140">d</text><text x="176" y="76" style="fill:#FF5C8A">garis singgung</text></svg>
+<p><b>Singgung persekutuan dua lingkaran</b> (jari-jari R dan r, jarak pusat d):</p>
+<div class="f"><math display="block"><mtext>Luar </mtext><mo>=</mo><msqrt><msup><mi>d</mi><mn>2</mn></msup><mo>−</mo><msup><mrow><mo>(</mo><mi>R</mi><mo>−</mo><mi>r</mi><mo>)</mo></mrow><mn>2</mn></msup></msqrt><mspace width="2em"/><mtext>Dalam </mtext><mo>=</mo><msqrt><msup><mi>d</mi><mn>2</mn></msup><mo>−</mo><msup><mrow><mo>(</mo><mi>R</mi><mo>+</mo><mi>r</mi><mo>)</mo></mrow><mn>2</mn></msup></msqrt></math></div>
+<div class="ex"><b>Penerapan.</b> Sabuk lurus menghubungkan dua roda berjari-jari 8 cm dan 3 cm dengan jarak pusat 13 cm. Bagian lurus sabuk = √(169 − 25) = <b>12 cm</b>.</div></div>
+<div class="card"><h2>7. Posisi dan jarak di permukaan Bumi</h2>
+<p>Bumi dapat dianggap bola berjari-jari <b>R ≈ 6.371 km</b>. Posisi suatu tempat ditentukan oleh <b>lintang</b> (utara atau selatan Khatulistiwa, 0° sampai 90°) dan <b>bujur</b> (timur atau barat meridian utama Greenwich, 0° sampai 180°). Lingkaran terbesar pada bola (misalnya Khatulistiwa dan setiap meridian) disebut <b>lingkaran besar</b>. Jarak terpendek dua tempat adalah <b>panjang busur lingkaran besar</b> yang melalui keduanya.</p>
+<div class="f"><math display="block"><mtext>Jarak </mtext><mo>=</mo><mfrac><mi>θ</mi><mn>360°</mn></mfrac><mo>×</mo><mn>2</mn><mi>π</mi><mi>R</mi></math></div>
+<p>θ adalah sudut pusat (sudut di pusat Bumi) yang menghadap kedua tempat.</p>
+<svg viewBox="0 0 300 235" role="img" aria-label="Penampang Bumi: titik A di 20 derajat lintang utara dan titik B di 25 derajat lintang selatan pada bujur yang sama, sudut pusat 45 derajat">
+<circle cx="150" cy="115" r="85" fill="#22D3EE14" stroke="var(--acc)" stroke-width="2"/>
+<path d="M51 115H249" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="5 4"/>
+<path d="M150 115L229.9 85.9M150 115L227.0 150.9" stroke="var(--ink)" stroke-width="1.5"/>
+<path d="M229.9 85.9A85 85 0 0 1 227.0 150.9" fill="none" stroke="#FF5C8A" stroke-width="4"/>
+<circle cx="150" cy="115" r="3" fill="var(--ink)"/><circle cx="229.9" cy="85.9" r="4.5" fill="#FFB547"/><circle cx="227.0" cy="150.9" r="4.5" fill="#FFB547"/>
+<text x="136" y="107">O</text><text x="237.9" y="81.9">A (20° LU)</text><text x="235.0" y="164.9">B (25° LS)</text>
+<text x="53" y="109" style="font-size:11px">Khatulistiwa</text><text x="164" y="137" style="fill:#FF5C8A">θ = 45°</text>
+</svg>
+<p><b>Cara menentukan θ:</b></p>
+<ul class="goals"><li>Dua tempat pada <b>bujur yang sama</b>: θ = selisih lintang jika di belahan yang sama, atau jumlah lintang jika berbeda belahan (utara dan selatan).</li><li>Dua tempat di <b>Khatulistiwa</b>: θ = selisih bujur jika sama sisi (BT dan BT), atau jumlah bujur jika berbeda sisi (BT dan BB). Jika jumlahnya lebih dari 180°, pakai 360° − jumlah.</li><li>Untuk dua tempat sembarang, θ dihitung dari koordinatnya. Cobalah di Lab 5.</li></ul>
+<div class="ex"><b>Contoh.</b> Kota A (20° LU) dan kota B (25° LS) berada pada bujur yang sama. θ = 20° + 25° = 45°. Jarak = 45/360 × 2π × 6.371 ≈ <b>5.004 km</b>.</div></div>
+<div class="card"><h2>8. Teorema lain tentang lingkaran</h2>
+<p><b>a. Segiempat tali busur</b> adalah segiempat yang keempat titik sudutnya terletak pada lingkaran. Sudut-sudut yang saling berhadapan <b>berjumlah 180°</b>.</p>
+<div class="f"><math display="block"><mo>∠</mo><mi>A</mi><mo>+</mo><mo>∠</mo><mi>C</mi><mo>=</mo><mn>180°</mn></math></div><div class="f"><math display="block"><mo>∠</mo><mi>B</mi><mo>+</mo><mo>∠</mo><mi>D</mi><mo>=</mo><mn>180°</mn></math></div>
+<svg viewBox="0 0 300 215" role="img" aria-label="Segiempat tali busur ABCD, sudut yang berhadapan berjumlah 180 derajat"><circle cx="150" cy="105" r="80" fill="none" stroke="var(--acc)" stroke-width="2"/>
+<path d="M74.8 132.4L211.3 156.4L190.0 35.7L98.6 43.7Z" fill="#7C5CFF22" stroke="var(--ink)" stroke-width="2"/>
+<text x="58.8" y="146.4">A</text><text x="217.3" y="170.4">B</text><text x="196.0" y="33.7">C</text><text x="82.6" y="41.7">D</text>
+<text x="142" y="109" style="fill:#FF5C8A">A + C = 180°</text><text x="142" y="127" style="fill:#FFB547">B + D = 180°</text></svg>
+<div class="ex"><b>Contoh.</b> Pada segiempat tali busur ABCD, ∠A = 80°. Maka ∠C = 180° − 80° = <b>100°</b>.</div>
+<p><b>b. Sudut antara garis singgung dan tali busur</b> sama besar dengan sudut keliling yang menghadap busur di dalam sudut itu (dan sama dengan setengah sudut pusat yang menghadap busur tersebut).</p>
+<svg viewBox="0 0 300 200" role="img" aria-label="Sudut antara garis singgung di A dan tali busur AB sama dengan sudut keliling yang menghadap busur AB"><circle cx="150" cy="100" r="70" fill="none" stroke="var(--acc)" stroke-width="2"/>
+<path d="M20 170.0H280" stroke="#FF5C8A" stroke-width="2.5"/><path d="M150.0 170.0L218.9 112.2" stroke="var(--ink)" stroke-width="2"/>
+<circle cx="150.0" cy="170.0" r="4" fill="var(--ink)"/><circle cx="218.9" cy="112.2" r="4" fill="var(--ink)"/>
+<text x="144.0" y="188.0">A</text><text x="226.9" y="116.2">B</text><text x="236" y="164.0" style="fill:#FF5C8A">garis singgung</text></svg>
+<div class="ex"><b>Contoh.</b> Sudut antara garis singgung di A dan tali busur AB adalah 40°. Sudut pusat yang menghadap busur AB = 2 × 40° = <b>80°</b>.</div>
+<p class="mute">Teorema lain yang sudah kamu pakai: sudut pusat = 2 × sudut keliling, sudut keliling yang menghadap diameter = 90°, garis singgung tegak lurus jari-jari, dan dua garis singgung dari titik luar sama panjang.</p></div>
+<div class="card"><h2>Langkah menyelesaikan soal cerita</h2>
+<p>1) Gambar lingkarannya dan tandai pusat, jari-jari, serta sudutnya. 2) Tentukan apa yang ditanya: sudut, panjang busur, atau luas juring. 3) Jika sudut yang diketahui sudut keliling, gandakan dulu menjadi sudut pusat. 4) Masukkan ke rumus, lalu tulis satuannya.</p>
+<p class="mute">Gunakan π = 22/7 jika r kelipatan 7, selain itu π = 3,14.</p></div>
+</section>
+
+<section id="eksplor" hidden>
+<div class="card"><h2>Eksplorasi interaktif</h2>
+<p class="mute">Geser sudut pusat dan jari-jari. Perhatikan sudut keliling di titik P selalu setengah sudut pusat.</p>
+<svg viewBox="0 0 300 280" id="viz" role="img" aria-label="Diagram lingkaran interaktif"></svg>
+<label for="th">Sudut pusat θ: <span id="thv"></span>°</label><input type="range" id="th" min="10" max="350" step="5" value="90">
+<label for="rr" style="margin-top:8px">Jari-jari r: <span id="rv"></span> cm</label><input type="range" id="rr" min="1" max="30" value="14">
+<div class="row" style="margin-top:8px"><label for="pi">Nilai π</label><select id="pi"><option value="22/7">22/7</option><option value="3.14">3,14</option></select></div>
+<div class="res" id="out"></div><div class="f" id="eq" style="white-space:normal"></div></div>
+<div class="card"><h2>Tali busur: makin jauh dari pusat, makin pendek</h2>
+<svg viewBox="0 0 300 230" id="sch" class="sim" role="img" aria-label="Simulasi tali busur"></svg>
+<label for="cr">Jari-jari r: <span id="crv"></span> cm</label><input type="range" id="cr" min="2" max="10" value="5">
+<label for="cd" style="margin-top:8px">Jarak pusat ke tali busur d: <span id="cdv"></span> cm</label><input type="range" id="cd" min="0" max="4.5" step="0.5" value="3">
+<div class="f" id="ceq" style="white-space:normal"></div></div>
+<div class="card"><h2>Garis singgung dari titik di luar lingkaran</h2>
+<svg viewBox="0 0 300 230" id="sgs" class="sim" role="img" aria-label="Simulasi garis singgung"></svg>
+<label for="gr">Jari-jari r: <span id="grv"></span> cm</label><input type="range" id="gr" min="2" max="8" value="3">
+<label for="gd" style="margin-top:8px">Jarak titik P ke pusat d: <span id="gdv"></span> cm</label><input type="range" id="gd" min="4" max="20" step="1" value="9">
+<div class="f" id="geq" style="white-space:normal"></div>
+<p class="mute">Dua garis singgung dari titik P selalu sama panjang.</p></div>
+
+</section>
+
+<section id="lab" hidden>
+<div class="seg" id="lseg"></div>
+<div id="labBody"></div>
+</section>
+
+<section id="jodoh" hidden>
+<div class="score"><span>Menjodohkan</span><span id="sj">0/5 cocok</span></div>
+<p class="mute">Pilih satu soal di kiri, lalu pilih jawabannya di kanan.</p>
+<div class="cols"><div id="jl"></div><div id="jr"></div></div>
+<div id="jf"></div>
+<p><button class="btn alt" id="jreset">Ulangi</button></p>
+</section>
+
+<section id="isian" hidden>
+<div class="score"><span>Isian singkat</span><span id="si">Skor 0/5</span></div>
+<div id="il"></div>
+<p><button class="btn alt" id="ireset">Ulangi</button></p>
+</section>
+
+<section id="pg" hidden>
+<div class="score"><span>Pilihan ganda</span><span id="sp">Skor 0/5</span></div>
+<div id="pl"></div>
+<p><button class="btn alt" id="preset">Ulangi</button></p></section><section id="bank" hidden>
+<div class="score"><span>Bank soal · <span id="bn"></span></span><span id="bs">Benar 0/0</span></div>
+<div class="card"><p class="mute">Soal dari 9 topik dan 3 tingkat. Pilih filter, lalu kerjakan. Pembahasan muncul setelah menjawab.</p><div class="row"><div><label for="ft">Topik</label><select id="ft"><option value="">Semua topik</option><option value="S">Sudut pusat &amp; keliling</option><option value="B">Panjang busur</option><option value="J">Luas juring</option><option value="T">Tali busur</option><option value="D">Lingkaran dalam &amp; luar segitiga</option><option value="G">Garis singgung</option><option value="K">Soal kontekstual</option><option value="E">Jarak di permukaan Bumi</option><option value="Q">Teorema lingkaran</option></select></div><div><label for="fl">Tingkat</label><select id="fl"><option value="">Semua tingkat</option><option value="1">Mudah</option><option value="2">Sedang</option><option value="3">Sulit</option></select></div><button class="btn" id="bgo">Acak soal</button></div></div>
+<div id="bl"></div>
+</section>
+
+<section id="akhir" hidden>
+<div class="card" id="exIntro"><h2>🏆 Ujian akhir</h2><p>10 soal acak dari 9 topik. Kerjakan tanpa petunjuk. Hasil, penguasaan tiap topik, dan pembahasan muncul di akhir. Nilai 70 ke atas membuka sertifikat.</p><div class="stats"><span>10 soal</span><span>Tanpa bocoran jawaban</span><span id="exBest">Nilai terbaik: -</span></div><button class="btn" id="exGo" type="button">Mulai ujian</button></div>
+<div id="exBody"></div>
+</section>
+<section id="kebun" hidden>
+<div class="card"><h2>Kebun Lingkaranku</h2>
+<div class="gh"><svg viewBox="0 0 100 110" style="width:84px;flex:none" role="img" aria-label="Maskot Lingko"><path d="M50 26 C48 10 36 5 27 9 C29 20 40 27 50 26Z" fill="#46C98A"/><path d="M50 26 C52 10 64 5 73 9 C71 20 60 27 50 26Z" fill="#2FA36B"/><circle cx="50" cy="66" r="38" fill="#FFD166"/><circle cx="37" cy="60" r="5" fill="#13233F"/><circle cx="63" cy="60" r="5" fill="#13233F"/><circle cx="39" cy="58" r="1.8" fill="#fff"/><circle cx="65" cy="58" r="1.8" fill="#fff"/><path d="M38 76 Q50 88 62 76" stroke="#13233F" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="72" r="5" fill="#FF8FB1" opacity=".6"/><circle cx="71" cy="72" r="5" fill="#FF8FB1" opacity=".6"/></svg><div class="bub" id="gmsg"></div></div>
+<div class="stats"><span id="gl"></span><span id="gw"></span><span>Mekar: <b id="gb"></b></span></div>
+<div class="bar" role="progressbar" aria-label="Progres tanaman berikutnya"><i id="gbar"></i></div>
+<p class="mute" id="gnext"></p></div>
+<div class="card"><svg id="garden" viewBox="0 0 360 340" style="max-width:520px" role="img" aria-label="Kebun berisi enam tanaman yang tumbuh sesuai jawaban benar"></svg>
+<p class="mute">Setiap jawaban benar yang baru (di menjodohkan, isian, pilihan ganda, atau bank soal) memberi 1 siraman 💧. Delapan siraman membuat satu tanaman mekar.</p></div>
+<div class="card"><h2>📜 Riwayat belajar</h2><p class="mute" id="rwnote"></p><div style="overflow-x:auto"><table class="ltab" id="rwtab"></table></div><p style="margin-top:10px"><button class="btn alt" id="rwdl" type="button">⬇️ Unduh riwayat (CSV)</button></p></div>
+<div class="card"><h2>Lencana</h2><div class="badges" id="gbd"></div>
+<p style="margin-top:12px"><button class="btn alt" id="greset" type="button">Mulai kebun baru</button></p>
+<p class="mute">Progres kebun tersimpan di perangkat dan browser ini.</p></div>
+</section>
+</div></main>
+<div class="dock"><div class="mpanel" id="mpanel"><label for="mv">Suasana musik</label><select id="mv"><option value="0">Lo-fi santai</option><option value="1">Semangat belajar</option><option value="2">Fokus tenang</option></select><label for="mvol" style="margin-top:8px">Volume</label><input type="range" id="mvol" min="0" max="100" value="50"><label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="msfx" checked> Efek suara</label><p class="mute" style="font-size:.78rem;margin:8px 0 0">Musik dibuat langsung oleh browser. Tekan 🎵 untuk memulai.</p></div><button class="bt sm" id="mtheme" type="button" aria-label="Ganti tema terang atau gelap">🌓</button><button class="bt sm" id="mset" type="button" aria-label="Pengaturan musik" aria-expanded="false">⚙️</button><button class="bt" id="mplay" type="button" aria-pressed="false" aria-label="Putar musik">🎵</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="cheer" id="cheer" aria-live="polite"><svg viewBox="0 0 100 110" width="46" height="50" aria-hidden="true"><path d="M50 26 C48 10 36 5 27 9 C29 20 40 27 50 26Z" fill="#46C98A"/><path d="M50 26 C52 10 64 5 73 9 C71 20 60 27 50 26Z" fill="#2FA36B"/><circle cx="50" cy="66" r="38" fill="#FFD166"/><circle cx="37" cy="60" r="5" fill="#13233F"/><circle cx="63" cy="60" r="5" fill="#13233F"/><circle cx="39" cy="58" r="1.8" fill="#fff"/><circle cx="65" cy="58" r="1.8" fill="#fff"/><path id="cmo" d="M36 74 Q50 92 64 74" stroke="#13233F" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="29" cy="72" r="5" fill="#FF8FB1" opacity=".6"/><circle cx="71" cy="72" r="5" fill="#FF8FB1" opacity=".6"/></svg><span id="cheerT"></span></div>
+<script>
+const $=s=>document.querySelector(s);
+const MI=s=>s.split(' ').filter(Boolean).map(t=>{let e='',c=t.match(/[.,]$/);if(c&&t.length>1){t=t.slice(0,-1);e='<mtext>'+c[0]+'</mtext>'}let u=t.replace(/^\((.*)\)$/,'$1'),m;return(/^[\d,.]+°?$/.test(u)?'<mn>'+u+'</mn>':(m=u.match(/^(\d+)\/(\d+)$/))?'<mfrac><mn>'+m[1]+'</mn><mn>'+m[2]+'</mn></mfrac>':(m=u.match(/^(\d+)²$/))?'<msup><mn>'+m[1]+'</mn><mn>2</mn></msup>':/^[×=≈+\-]$/.test(u)?'<mo>'+u+'</mo>':/^[a-zθπ]$/.test(u)?'<mi>'+u+'</mi>':/^[¼½⅓]$/.test(u)?'<mn>'+u+'</mn>':'<mtext>&nbsp;'+u+'&nbsp;</mtext>')+e}).join('');
+const M=s=>'<math>'+s.split(/(akar \([^)]*\)|akar \d+)/).filter(Boolean).map(g=>/^akar /.test(g)?'<msqrt>'+MI(g.slice(5).replace(/^\(|\)$/g,''))+'</msqrt>':MI(g)).join('')+'</math>';
+document.querySelectorAll('.m').forEach(e=>e.innerHTML=M(e.textContent));
+const fmt=n=>n.toLocaleString('id-ID',{maximumFractionDigits:2});
+const SECS=['beranda','materi','eksplor','lab','jodoh','isian','pg','bank','akhir','kebun'];
+const T=[['beranda','🏠 Beranda'],['materi','📘 Materi'],['eksplor','🔭 Eksplorasi'],['lab','🧪 Lab maya'],['jodoh','✍️ Latihan'],['bank','📚 Bank soal'],['akhir','🏆 Ujian akhir'],['kebun','🌱 Kebun']];
+const LAT=['jodoh','isian','pg'],LATN={jodoh:'🔗 Menjodohkan',isian:'✏️ Isian',pg:'🎯 Pilihan ganda'};
+let lastLat='jodoh';
+const nav=$('#tabs');
+function go(sec){SECS.forEach(x=>{$('#'+x).hidden=x!=sec});const tid=LAT.includes(sec)?'jodoh':sec;T.forEach(([x],j)=>nav.children[j].setAttribute('aria-selected',x==tid));scrollTo(0,0)}
+T.forEach(([id,l],i)=>{const b=document.createElement('button');b.textContent=l;b.setAttribute('role','tab');b.setAttribute('aria-selected',i==0);b.onclick=()=>go(id=='jodoh'?lastLat:id);nav.appendChild(b)});
+LAT.forEach(id=>{const d=document.createElement('div');d.className='seg';LAT.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=LATN[x];b.setAttribute('aria-pressed',x==id);b.onclick=()=>{lastLat=x;go(x)};d.appendChild(b)});$('#'+id).prepend(d)});
+document.addEventListener('click',ev=>{const t=ev.target.closest&&ev.target.closest('[data-go]');if(t)go(t.dataset.go)});
+
+/* Eksplorasi */
+function draw(){
+ const th=+$('#th').value,r=+$('#rr').value,p=eval($('#pi').value),R=105,cx=150,cy=140,h=th/2*Math.PI/180;
+ $('#thv').textContent=th;$('#rv').textContent=r;
+ const ax=cx+R*Math.cos(h),ay=cy-R*Math.sin(h),by=cy+R*Math.sin(h),px=cx-R;
+ $('#viz').innerHTML=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--acc)" stroke-width="2"/>
+ <path d="M${cx} ${cy} L${ax} ${ay} A${R} ${R} 0 ${th>180?1:0} 1 ${ax} ${by} Z" fill="#FFB547" opacity=".78"/>
+ <path d="M${cx} ${cy} L${ax} ${ay} M${cx} ${cy} L${ax} ${by} M${px} ${cy} L${ax} ${ay} M${px} ${cy} L${ax} ${by}" stroke="var(--ink)" stroke-width="1.5" fill="none"/>
+ <path d="M${ax} ${ay} A${R} ${R} 0 ${th>180?1:0} 1 ${ax} ${by}" fill="none" stroke="var(--bad)" stroke-width="4"/>
+ <circle cx="${cx}" cy="${cy}" r="3" fill="var(--ink)"/>
+ <text x="${cx-14}" y="${cy+18}">O</text><text x="${ax+6}" y="${ay-4}">A</text><text x="${ax+6}" y="${by+14}">B</text><text x="${px-14}" y="${cy+4}">P</text>
+ <text x="${cx+14}" y="${cy+4}">${th}°</text><text x="${px+30}" y="${cy+4}">${th/2}°</text>`;
+ const k=2*p*r*th/360,l=p*r*r*th/360;
+ const pv=$('#pi').value=='22/7'?'<mfrac><mn>22</mn><mn>7</mn></mfrac>':'<mn>3,14</mn>',fr='<mfrac><mn>'+th+'</mn><mn>360</mn></mfrac>';
+ $('#eq').innerHTML='<math display="block"><mtext>Busur </mtext><mo>=</mo>'+fr+'<mo>×</mo><mn>2</mn><mo>×</mo>'+pv+'<mo>×</mo><mn>'+r+'</mn><mo>=</mo><mn>'+fmt(k)+'</mn><mtext>&nbsp;cm</mtext></math><math display="block"><mtext>Juring </mtext><mo>=</mo>'+fr+'<mo>×</mo>'+pv+'<mo>×</mo><msup><mn>'+r+'</mn><mn>2</mn></msup><mo>=</mo><mn>'+fmt(l)+'</mn><mtext>&nbsp;cm²</mtext></math>';
+ $('#out').innerHTML=`<div>Sudut pusat<b>${th}°</b></div><div>Sudut keliling<b>${th/2}°</b></div><div>Panjang busur<b>${fmt(k)} cm</b></div><div>Luas juring<b>${fmt(l)} cm²</b></div>`;
+}
+['th','rr','pi'].forEach(i=>$('#'+i).addEventListener('input',draw));draw();
+
+/* Menjodohkan */
+const J=[['Roda berjari-jari 14 cm berputar 90°. Berapa panjang busur lintasan tepinya?','22 cm'],
+['Pizza berjari-jari 21 cm dipotong juring 60°. Berapa luas potongannya?','231 cm²'],
+['Sudut pusat suatu busur 100°. Berapa sudut keliling yang menghadap busur sama?','50°'],
+['Busur 22 cm pada lingkaran berjari-jari 21 cm. Berapa sudut pusatnya?','60°'],
+['Berapa besar sudut keliling yang menghadap diameter?','90°']];
+const shuf=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+let jsel=null,jdone=0,jtry=0;
+function jInit(){
+ jsel=null;jdone=0;jtry=0;$('#jf').innerHTML='';$('#sj').textContent='0/5 cocok';
+ $('#jl').innerHTML='';$('#jr').innerHTML='';
+ J.forEach((p,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=p[0];b.dataset.i=i;b.onclick=()=>{if(b.disabled)return;document.querySelectorAll('#jl .opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');jsel=i};$('#jl').appendChild(b)});
+ shuf(J.map((p,i)=>[p[1],i])).forEach(([t,i])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.dataset.i=i;b.style.textAlign='center';b.onclick=()=>{
+  if(jsel===null){$('#jf').innerHTML='<div class="fb bad">Pilih soal di kiri dulu.</div>';return}
+  jtry++;const L=$('#jl').children[jsel];
+  if(jsel==i){L.classList.remove('sel');L.classList.add('ok');L.disabled=true;b.classList.add('ok');b.disabled=true;award('j'+i);jsel=null;jdone++;$('#sj').textContent=jdone+'/5 cocok';
+   $('#jf').innerHTML=jdone==5?`<div class="fb ok">Semua cocok dengan ${jtry} percobaan. ${jtry==5?'Sempurna!':'Coba lagi untuk mengurangi kesalahan.'}</div>`:'<div class="fb ok">'+cheer(true)+'</div>'}
+  else{b.classList.add('bad');setTimeout(()=>b.classList.remove('bad'),600);$('#jf').innerHTML='<div class="fb bad">'+cheer(false)+' Hitung ulang dengan rumus di tab Materi.</div>'}
+ };$('#jr').appendChild(b)});
+}
+$('#jreset').onclick=jInit;jInit();
+
+/* Isian */
+const I=[['Sudut pusat sebuah juring 120° dan jari-jari 21 cm. Panjang busurnya … cm.',44,'(120/360) × 2 × 22/7 × 21 = 44'],
+['Taman berbentuk juring dengan r = 14 m dan sudut 45°. Luas taman … m².',77,'(45/360) × 22/7 × 14² = 77'],
+['Sudut keliling suatu busur 35°. Sudut pusat yang menghadap busur sama … °.',70,'2 × 35° = 70°'],
+['Lampu menyinari juring seluas 154 cm² dari lingkaran r = 14 cm (luas penuh 616 cm²). Sudut juring … °.',90,'154/616 = 1/4, maka 1/4 × 360° = 90°'],
+['Busur 11 cm dengan sudut pusat 45°. Jari-jari lingkaran … cm.',14,'11 = (45/360) × 2 × 22/7 × r, maka r = 14']];
+let isc=0,idn=0;
+function iInit(){isc=0;idn=0;$('#si').textContent='Skor 0/5';const c=$('#il');c.innerHTML='';
+ I.forEach((q,i)=>{const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<div class="q">${i+1}. ${q[0]}</div><div class="row"><input type="text" inputmode="decimal" aria-label="Jawaban soal ${i+1}" size="10"><button class="btn">Periksa</button></div><div class="fb-w"></div>`;
+  const inp=d.querySelector('input'),btn=d.querySelector('button'),fb=d.querySelector('.fb-w');
+  const go=()=>{if(btn.disabled)return;const v=parseFloat(inp.value.replace(',','.').replace(/[^0-9.\-]/g,''));
+   if(isNaN(v)){fb.innerHTML='<div class="fb bad">Isi dengan angka.</div>';return}
+   btn.disabled=inp.disabled=true;idn++;
+   if(Math.abs(v-q[1])<.01){isc++;award('i'+i);fb.innerHTML='<div class="fb ok"><b>'+cheer(true)+'</b> '+M(q[2])+'</div>'}
+   else fb.innerHTML='<div class="fb bad"><b>'+cheer(false)+'</b> Pembahasan: '+M(q[2])+'</div>';
+   $('#si').textContent='Skor '+isc+'/5'+(idn==5?' (selesai)':'')};
+  btn.onclick=go;inp.onkeydown=e=>{if(e.key=='Enter')go()};c.appendChild(d)})}
+$('#ireset').onclick=iInit;iInit();
+
+/* Pilihan ganda */
+const P=[['Sudut pusat suatu busur 72°. Sudut keliling yang menghadap busur sama adalah …',['144°','36°','72°','18°'],1,'Sudut keliling = ½ × 72° = 36°.'],
+['Jarum menit sebuah jam dinding panjangnya 14 cm. Dalam 15 menit, ujung jarum menempuh lintasan sepanjang …',['11 cm','22 cm','44 cm','88 cm'],1,'15 menit = 90°. Busur = ¼ × 2 × 22/7 × 14 = 22 cm.'],
+['Juring berjari-jari 7 cm dan sudut pusat 90° memiliki luas …',['19,25 cm²','38,5 cm²','77 cm²','154 cm²'],1,'¼ × 22/7 × 7² = ¼ × 154 = 38,5 cm².'],
+['Sudut ABC dan ADC adalah sudut keliling yang menghadap busur AC dan besarnya 50°. Sudut pusat AOC adalah …',['25°','50°','100°','130°'],2,'Sudut pusat = 2 × 50° = 100°.'],
+['Sprinkler menyiram taman berbentuk juring 120° dengan jangkauan 7 m. Luas taman yang tersiram kira-kira …',['25,7 m²','51,3 m²','77 m²','154 m²'],1,'⅓ × 22/7 × 7² = 154/3 ≈ 51,3 m².']];
+let psc=0,pdn=0;
+function pInit(){psc=0;pdn=0;$('#sp').textContent='Skor 0/5';const c=$('#pl');c.innerHTML='';
+ P.forEach((q,i)=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<div class="q">${i+1}. ${q[0]}</div>`;
+  const fb=document.createElement('div');const bs=[];
+  q[1].forEach((t,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+t;bs.push(b);
+   b.onclick=()=>{bs.forEach(x=>x.disabled=true);pdn++;bs[q[2]].classList.add('ok');
+    if(j==q[2]){psc++;award('p'+i);fb.innerHTML='<div class="fb ok"><b>'+cheer(true)+'</b> '+M(q[3])+'</div>'}
+    else{b.classList.add('bad');fb.innerHTML='<div class="fb bad"><b>'+cheer(false)+'</b> '+M(q[3])+'</div>'}
+    $('#sp').textContent='Skor '+psc+'/5'+(pdn==5?' (selesai)':'')};d.appendChild(b)});
+  d.appendChild(fb);c.appendChild(d)})}
+$('#preset').onclick=pInit;pInit();
+
+/* Skor total + perayaan */
+/* Bank soal: [topik, tingkat, soal, opsi|null, kunci, pembahasan] */
+const BK=[
+['S',1,'Sudut pusat suatu busur 80°. Sudut keliling yang menghadap busur yang sama adalah …',['160°','40°','80°','20°'],1,'½ × 80° = 40°'],
+['S',1,'Sudut keliling suatu busur 65°. Sudut pusat yang menghadap busur yang sama adalah … °.',null,130,'2 × 65° = 130°'],
+['S',2,'PQ adalah diameter lingkaran dan R terletak pada lingkaran. Besar sudut PRQ adalah …',['45°','60°','90°','180°'],2,'Sudut keliling yang menghadap diameter selalu 90°.'],
+['S',2,'Sudut pusat AOB = 110°. Sudut keliling ACB dan ADB menghadap busur AB yang sama. Jumlah keduanya … °.',null,110,'½ × 110° = 55°, maka 55° + 55° = 110°'],
+['S',3,'O pusat lingkaran dan sudut keliling ACB = 35°, dengan A dan B pada lingkaran. Besar sudut OAB adalah …',['35°','55°','70°','110°'],1,'Sudut AOB = 2 × 35° = 70°. Segitiga AOB sama kaki, maka 180° - 70° = 110°, lalu 110° : 2 = 55°'],
+['B',1,'Lingkaran berjari-jari 7 cm. Panjang busur setengah lingkaran (θ = 180°) adalah … cm.',null,22,'180/360 × 2 × 22/7 × 7 = 22'],
+['B',1,'Pada lingkaran yang sama, jika sudut pusat dibuat 2 kali lebih besar, panjang busurnya menjadi …',['tetap','2 kali','setengah','4 kali'],1,'Panjang busur sebanding dengan sudut pusat, jadi ikut menjadi 2 kali.'],
+['B',2,'Lingkaran berjari-jari 14 cm dengan sudut pusat 45°. Panjang busurnya … cm.',null,11,'45/360 × 2 × 22/7 × 14 = 11'],
+['B',2,'Keliling lingkaran 132 cm. Busur sepanjang 33 cm memiliki sudut pusat … °.',null,90,'33/132 × 360° = 90°'],
+['B',3,'Gunakan π = 3,14. Lingkaran berjari-jari 12 cm, sudut pusat 120°. Panjang busurnya … cm.',null,25.12,'120/360 × 2 × 3,14 × 12 = 25,12'],
+['B',3,'Pada lingkaran yang sama, busur dengan sudut pusat 40° panjangnya 10 cm. Busur dengan sudut pusat 100° panjangnya …',['20 cm','25 cm','30 cm','40 cm'],1,'100/40 × 10 = 25 cm'],
+['J',1,'Lingkaran berjari-jari 14 cm. Luas juring dengan sudut pusat 90° adalah … cm².',null,154,'90/360 × 22/7 × 14² = 154'],
+['J',1,'Juring berbentuk seperempat lingkaran memiliki sudut pusat …',['45°','60°','90°','180°'],2,'360° : 4 = 90°'],
+['J',2,'Lingkaran berjari-jari 21 cm. Luas juring dengan sudut pusat 120° adalah … cm².',null,462,'120/360 × 22/7 × 21² = 462'],
+['J',2,'Juring bersudut pusat 90° berluas 38,5 cm². Jari-jari lingkarannya … cm.',null,7,'38,5 = 90/360 × 22/7 × r², maka r² = 49 dan r = 7'],
+['J',3,'Pada lingkaran yang sama, perbandingan luas juring bersudut 60° dan 120° adalah …',['1 : 2','1 : 3','2 : 1','1 : 6'],0,'Luas juring sebanding dengan sudut pusat, maka 60 : 120 = 1 : 2'],
+['J',3,'Lingkaran berjari-jari 21 cm (luas 1.386 cm²). Juring seluas 231 cm² memiliki sudut pusat … °.',null,60,'231/1386 × 360° = 60°'],
+['T',1,'Tali busur terpanjang pada sebuah lingkaran adalah …',['jari-jari','diameter','apotema','busur'],1,'Tali busur terpanjang melalui pusat, yaitu diameter.'],
+['T',2,'Lingkaran berjari-jari 13 cm. Jarak pusat ke tali busur 5 cm. Panjang tali busur … cm.',null,24,'Setengah tali busur = akar (169 - 25) = akar 144 = 12, maka tali busur = 2 × 12 = 24'],
+['T',2,'Lingkaran berjari-jari 10 cm memiliki tali busur 16 cm. Jarak pusat ke tali busur … cm.',null,6,'Setengah tali busur = 8, maka d = akar (100 - 64) = akar 36 = 6'],
+['D',1,'Pusat lingkaran luar suatu segitiga adalah titik potong …',['garis bagi','garis tinggi','garis sumbu sisi','garis berat'],2,'Pusat lingkaran luar berada di titik potong garis sumbu sisi, pusat lingkaran dalam di titik potong garis bagi sudut.'],
+['D',2,'Segitiga siku-siku dengan sisi 6 cm, 8 cm, 10 cm. Jari-jari lingkaran dalamnya … cm.',null,2,'6 + 8 - 10 = 4, maka r = 4 : 2 = 2'],
+['D',2,'Segitiga siku-siku dengan sisi 6 cm, 8 cm, 10 cm. Jari-jari lingkaran luarnya … cm.',null,5,'R = sisi miring : 2 = 10 : 2 = 5'],
+['D',3,'Segitiga bersisi 13 cm, 14 cm, 15 cm berluas 84 cm². Jari-jari lingkaran dalamnya … cm.',null,4,'s = 21, maka r = 84 : 21 = 4'],
+['G',1,'Garis singgung lingkaran dan jari-jari di titik singgung membentuk sudut …',['30°','45°','90°','180°'],2,'Garis singgung selalu tegak lurus jari-jari di titik singgung, yaitu 90°.'],
+['G',1,'Dua garis singgung yang ditarik dari satu titik di luar lingkaran memiliki panjang …',['berbeda','sama','dua kali jari-jari','sama dengan diameter'],1,'Kedua garis singgung dari titik luar sama panjang.'],
+['G',2,'Titik P berjarak 13 cm dari pusat lingkaran berjari-jari 5 cm. Panjang garis singgung dari P … cm.',null,12,'akar (169 - 25) = akar 144 = 12'],
+['G',2,'Titik P berjarak 10 cm dari pusat. Panjang garis singgung dari P adalah 8 cm. Jari-jari lingkaran … cm.',null,6,'r = akar (100 - 64) = akar 36 = 6'],
+['G',3,'Dua lingkaran berjari-jari 10 cm dan 2 cm, jarak pusat 17 cm. Panjang garis singgung persekutuan luar … cm.',null,15,'akar (289 - 64) = akar 225 = 15, karena R - r = 8'],
+['G',3,'Dua lingkaran berjari-jari 8 cm dan 2 cm, jarak pusat 26 cm. Panjang garis singgung persekutuan dalam … cm.',null,24,'R + r = 10, maka akar (676 - 100) = akar 576 = 24'],
+['K',1,'Roda sepeda berjari-jari 35 cm. Satu putaran penuh menempuh jarak …',['110 cm','220 cm','440 cm','1.540 cm'],1,'2 × 22/7 × 35 = 220 cm'],
+['K',2,'Wiper mobil sepanjang 28 cm menyapu sudut 90°. Luas kaca yang tersapu … cm².',null,616,'90/360 × 22/7 × 28² = 616'],
+['K',2,'Jarum menit jam dinding panjangnya 21 cm. Dalam 30 menit, ujung jarum menempuh lintasan sepanjang …',['33 cm','44 cm','66 cm','132 cm'],2,'30 menit = 180°, maka 180/360 × 2 × 22/7 × 21 = 66 cm'],
+['K',3,'Lampu mercusuar menyinari laut berbentuk juring bersudut 72° dengan jangkauan 35 m. Luas daerah tersinari … m².',null,770,'72/360 × 22/7 × 35² = 770'],
+['K',3,'Pizza berjari-jari 14 cm dipotong menjadi 8 juring sama besar. Luas satu potong adalah …',['38,5 cm²','77 cm²','88 cm²','154 cm²'],1,'Luas pizza 22/7 × 14² = 616, maka 616 : 8 = 77 cm²'],
+['K',3,'Taman berbentuk juring berjari-jari 14 m dengan sudut 90° dipagari sepanjang busur dan kedua jari-jarinya. Panjang pagar … m.',null,50,'Busur = 90/360 × 2 × 22/7 × 14 = 22, maka 22 + 14 + 14 = 50'],
+['K',3,'Roda berjari-jari 21 cm. Agar menempuh jarak 66 m, roda harus berputar … kali.',null,50,'Keliling roda 2 × 22/7 × 21 = 132 cm, maka 6600 : 132 = 50'],
+['K',3,'Sabuk lurus menghubungkan dua roda berjari-jari 8 cm dan 3 cm dengan jarak pusat 13 cm. Panjang bagian lurus sabuk … cm.',null,12,'R - r = 5, maka akar (169 - 25) = akar 144 = 12'],
+['E',1,'Dua kota berada di Khatulistiwa dengan selisih bujur 30°. Dengan R = 6.300 km dan π = 22/7, jarak kedua kota … km.',null,3300,'30/360 × 2 × 22/7 × 6300 = 1/12 × 39600 = 3300'],
+['E',1,'Kota A di 20° LU dan kota B di 25° LS pada bujur yang sama. Besar sudut pusat yang menghadap A dan B adalah … °.',null,45,'Beda belahan, maka 20° + 25° = 45°'],
+['E',2,'Kota P di 15° LU dan kota Q di 25° LS pada bujur yang sama. Dengan R = 6.300 km dan π = 22/7, jarak P dan Q … km.',null,4400,'θ = 15° + 25° = 40°. Jarak = 40/360 × 2 × 22/7 × 6300 = 1/9 × 39600 = 4400'],
+['E',1,'Jarak terpendek dua tempat di permukaan Bumi diukur sepanjang …',['garis lintang yang melalui keduanya','busur lingkaran besar yang melalui keduanya','garis lurus menembus Bumi','selisih bujur dikali 111 km'],1,'Jarak terpendek di permukaan bola adalah panjang busur lingkaran besar yang melalui kedua titik.'],
+['E',2,'Dua kota di Khatulistiwa berjarak 5.500 km. Dengan R = 6.300 km dan π = 22/7, sudut pusat yang menghadap kedua kota … °.',null,50,'Keliling = 2 × 22/7 × 6300 = 39600. θ = 5500/39600 × 360 = 50'],
+['E',3,'Kota X di 20° BB dan kota Y di 40° BT, keduanya di Khatulistiwa. Dengan R = 6.300 km dan π = 22/7, jarak X dan Y … km.',null,6600,'Berbeda sisi, maka θ = 20° + 40° = 60°. Jarak = 60/360 × 39600 = 6600'],
+['Q',1,'ABCD segiempat tali busur dengan ∠A = 80°. Besar ∠C adalah … °.',null,100,'Sudut berhadapan berjumlah 180°, maka 180° - 80° = 100°'],
+['Q',1,'PQRS segiempat tali busur dengan ∠Q = 65°. Besar ∠S adalah …',['65°','105°','115°','125°'],2,'∠Q + ∠S = 180°, maka ∠S = 115°'],
+['Q',2,'Pada segiempat tali busur, dua sudut berhadapan masing-masing (2x + 10)° dan (3x - 20)°. Nilai x adalah …',null,38,'(2x + 10) + (3x - 20) = 180, maka 5x - 10 = 180 dan x = 38'],
+['Q',2,'Segiempat tali busur PQRS memiliki ∠P = 3y° dan ∠R = 120°. Nilai y adalah …',null,20,'3y + 120 = 180, maka 3y = 60 dan y = 20'],
+['Q',3,'Sudut antara garis singgung di titik A dan tali busur AB adalah 40°. Besar sudut pusat yang menghadap busur AB adalah …',['20°','40°','80°','140°'],2,'Sudut garis singgung dan tali busur sama dengan sudut keliling (40°). Sudut pusat = 2 × 40° = 80°']];
+const TL={S:'Sudut',B:'Busur',J:'Juring',T:'Tali busur',D:'Segitiga',G:'Singgung',K:'Kontekstual',E:'Jarak di Bumi',Q:'Teorema'},LV=['','Mudah','Sedang','Sulit'];
+let bsc=0,bdn=0;
+function bGo(){
+ const t=$('#ft').value,lv=$('#fl').value,L=shuf(BK.filter(q=>(!t||q[0]==t)&&(!lv||q[1]==lv)));
+ bsc=0;bdn=0;$('#bn').textContent=L.length+' soal';$('#bs').textContent='Benar 0/0';
+ const c=$('#bl');c.innerHTML=L.length?'':'<div class="card">Tidak ada soal untuk pilihan ini.</div>';
+ const fin=ok=>{bdn++;if(ok)bsc++;$('#bs').textContent='Benar '+bsc+'/'+bdn;if(bdn==L.length){c.insertAdjacentHTML('beforeend','<div class="f" style="white-space:normal">Nilai akhir: '+Math.round(bsc/L.length*100)+' dari 100</div>');if(bsc==L.length)boom()}};
+ L.forEach((q,i)=>{const d=document.createElement('div');d.className='card';
+  d.innerHTML='<div class="q"><span class="tag">'+TL[q[0]]+'</span><span class="tag">'+LV[q[1]]+'</span><br>'+(i+1)+'. '+q[2]+'</div>';
+  const fb=document.createElement('div'),show=ok=>{fb.innerHTML='<div class="fb '+(ok?'ok"><b>'+cheer(true)+'</b> ':'bad"><b>'+cheer(false)+'</b> Pembahasan: ')+M(q[5])+'</div>'};
+  if(q[3]){const bs=[];q[3].forEach((tx,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+tx;bs.push(b);b.onclick=()=>{bs.forEach(x=>x.disabled=true);bs[q[4]].classList.add('ok');if(j!=q[4])b.classList.add('bad');show(j==q[4]);if(j==q[4])award('b'+BK.indexOf(q));fin(j==q[4])};d.appendChild(b)})}
+  else{const r=document.createElement('div');r.className='row';r.innerHTML='<input type="text" inputmode="decimal" size="10" aria-label="Jawaban soal '+(i+1)+'"><button class="btn">Periksa</button>';const inp=r.querySelector('input'),bt=r.querySelector('button');const go=()=>{if(bt.disabled)return;const v=parseFloat(inp.value.replace(',','.').replace(/[^0-9.\-]/g,''));if(isNaN(v))return;bt.disabled=inp.disabled=true;const ok=Math.abs(v-q[4])<.01;show(ok);if(ok)award('b'+BK.indexOf(q));fin(ok)};bt.onclick=go;inp.onkeydown=e=>{if(e.key=='Enter')go()};d.appendChild(r)}
+  d.appendChild(fb);c.appendChild(d)})}
+['#ft','#fl'].forEach(s=>{$(s).onchange=bGo});$('#bgo').onclick=bGo;bGo();
+
+const got={};
+function boom(){for(let i=0;i<36;i++){const s=document.createElement('span');s.className='cf';s.textContent=['🎉','⭐','✨','🔵'][i%4];s.style.left=Math.random()*100+'vw';s.style.setProperty('--x',(Math.random()*160-80)+'px');s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),3000)}}
+function upd(){const m=s=>+(($(s).textContent.match(/(\d+)\//)||[0,0])[1]);const v={j:m('#sj'),i:m('#si'),p:m('#sp')};for(const k in v){if(v[k]==5&&!got[k]){got[k]=1;boom()}else if(v[k]<5)got[k]=0}}
+['#sj','#si','#sp'].forEach(s=>new MutationObserver(upd).observe($(s),{childList:true,characterData:true,subtree:true}));
+/* ===== Kebun, musik, dan efek suara ===== */
+const TOT=15+BK.length+5,KEYS='lk_kebun_v1';
+const SP=[{n:'Bunga Matahari',c:'#FFC933'},{n:'Tulip',c:'#FF5C8A'},{n:'Aster',c:'#FFFFFF'},{n:'Kaktus',c:'#19C79A'},{n:'Sakura Mini',c:'#FFB3D1'},{n:'Lavender',c:'#9B7CFF'}];
+const SN=['Benih','Tunas','Berdaun','Mekar!'],GRN='#2FA36B',GRN2='#46C98A';
+let gs=new Set();try{gs=new Set(JSON.parse(localStorage.getItem(KEYS)||'[]'))}catch(e){}
+const STG=w=>w>=8?3:w>=3?2:w>=1?1:0;
+const leaf=(x,y,r,k)=>`<ellipse cx="${x}" cy="${y}" rx="${7*k}" ry="${3.4*k}" fill="${GRN2}" transform="rotate(${r} ${x} ${y})"/>`;
+function head(t){
+ if(t==0){let s='';for(let i=0;i<12;i++)s+=`<ellipse cx="0" cy="-12" rx="4.2" ry="8" fill="#FFC933" transform="rotate(${i*30})"/>`;return s+'<circle r="8.5" fill="#7B4A21"/><circle r="4" fill="#5A3416"/>'}
+ if(t==1)return '<path d="M-11 -1 Q-14 -24 0 -30 Q14 -24 11 -1 Q0 5 -11 -1Z" fill="#FF5C8A"/><path d="M-5 -2 Q-3 -22 0 -30 Q3 -22 5 -2Z" fill="#FF8FB1"/>';
+ if(t==2){let s='';for(let i=0;i<10;i++)s+=`<ellipse cx="0" cy="-10" rx="3.4" ry="8.5" fill="#fff" stroke="#C9D2E8" stroke-width=".8" transform="rotate(${i*36})"/>`;return s+'<circle r="5" fill="#FFC933"/>'}
+ if(t==5){let s='';for(let i=0;i<7;i++)s+=`<ellipse cx="${i%2?3:-3}" cy="${-i*5}" rx="4" ry="3.4" fill="${i%3?'#9B7CFF':'#B79DFF'}"/>`;return s}
+ return ''}
+function plantG(t,s,x,y){
+ let o=`<path d="M${x-20} ${y} L${x+20} ${y} L${x+15} ${y+22} L${x-15} ${y+22}Z" fill="#C8683A"/><rect x="${x-23}" y="${y-4}" width="46" height="8" rx="4" fill="#E07B47"/><ellipse cx="${x}" cy="${y-3}" rx="18" ry="3.5" fill="#5A3A22"/>`;
+ const b=y-4;
+ if(s==0)return o+`<ellipse cx="${x}" cy="${b-1}" rx="3.2" ry="2.1" fill="#8B5E34"/>`;
+ if(t==3){const H=[0,16,30,42][s];
+  o+=`<rect x="${x-8}" y="${b-H}" width="16" height="${H}" rx="8" fill="#19C79A"/><path d="M${x-3} ${b-H+7}V${b-3}M${x+3} ${b-H+7}V${b-3}" stroke="#0E9F78" stroke-width="1.5"/>`;
+  const ay=b-H*.4;
+  if(s>=2)o+=`<rect x="${x-18}" y="${ay-3}" width="12" height="6" rx="3" fill="#19C79A"/><rect x="${x-21}" y="${ay-16}" width="8" height="19" rx="4" fill="#19C79A"/>`;
+  if(s>=3)o+=`<rect x="${x+6}" y="${ay-3}" width="12" height="6" rx="3" fill="#19C79A"/><rect x="${x+13}" y="${ay-16}" width="8" height="19" rx="4" fill="#19C79A"/><circle cx="${x}" cy="${b-H-2}" r="6" fill="#FF5C8A"/><circle cx="${x}" cy="${b-H-2}" r="2.5" fill="#FFD166"/>`;
+  return o}
+ if(t==4&&s>=2){
+  o+=`<path d="M${x-3} ${b} L${x-2} ${b-32} L${x+2} ${b-32} L${x+3} ${b}Z" fill="#8B5E34"/>`;
+  const c=s==3?'#FFB3D1':'#3DBE7A';
+  o+=`<circle cx="${x}" cy="${b-44}" r="15" fill="${c}"/><circle cx="${x-13}" cy="${b-34}" r="11" fill="${c}"/><circle cx="${x+13}" cy="${b-34}" r="11" fill="${c}"/>`;
+  if(s==3)o+=[[-8,-48],[6,-50],[-15,-36],[14,-38],[0,-38],[-4,-30],[9,-30]].map(q=>`<circle cx="${x+q[0]}" cy="${b+q[1]}" r="2.6" fill="#FF8FB1"/>`).join('');
+  return o}
+ const H=[0,16,32,48][s];
+ o+=`<path d="M${x} ${b} V${b-H}" stroke="${GRN}" stroke-width="3.2" stroke-linecap="round"/>`+leaf(x-8,b-H*.35,-30,1)+leaf(x+8,b-H*.5,30,1);
+ if(s>=2)o+=leaf(x-8,b-H*.72,-30,1.1)+leaf(x+8,b-H*.9,30,1.1);
+ if(s==2)o+=`<ellipse cx="${x}" cy="${b-H-5}" rx="4.5" ry="6.5" fill="${t==0?'#6DBE4A':SP[t].c}" stroke="#00000022"/>`;
+ if(s==3)o+=`<g transform="translate(${x} ${b-H})">${head(t)}</g>`;
+ return o}
+function sceneSvg(W,act,ch){
+ const px=[70,180,290],py=[115,265];
+ let o='<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FD3FF"/><stop offset="1" stop-color="#EAF8FF"/></linearGradient></defs><rect width="360" height="340" rx="18" fill="url(#sky)"/><circle cx="320" cy="34" r="26" fill="#FFD166" opacity=".3"/><circle cx="320" cy="34" r="17" fill="#FFD166"/><ellipse cx="58" cy="38" rx="30" ry="9" fill="#fff" opacity=".85"/><ellipse cx="76" cy="31" rx="20" ry="9" fill="#fff" opacity=".85"/><rect y="330" width="360" height="10" fill="#79D39A"/>';
+ py.forEach(y=>{o+=`<rect x="22" y="${y+22}" width="316" height="6" rx="3" fill="#8B5E34"/>`});
+ for(let i=0;i<6;i++){
+  const x=px[i%3],y=py[i/3|0],w=Math.max(0,Math.min(8,W-i*8)),st=STG(w);
+  o+=`<g class="${ch===i?'pop':''}">${plantG(i,st,x,y)}</g>`;
+  if(i==act)o+=`<g class="bob"><path d="M${x+30} ${y-62} q-7 10 0 15 q7 -5 0 -15z" fill="#22A9E8"/></g>`;
+  const lock=W<i*8;
+  o+=`<text x="${x}" y="${y+44}" text-anchor="middle" style="fill:#13233F;font-size:11px;font-weight:600">${SP[i].n}</text><text x="${x}" y="${y+58}" text-anchor="middle" style="fill:#51627C;font-size:10px">${lock?'Belum ditanam':SN[st]+' · '+w+'/8'}</text>`}
+ return o}
+function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2300)}
+function renderGarden(ch){
+ const W=gs.size,act=W<48?Math.floor(W/8):-1,bl=Math.min(6,Math.floor(Math.min(W,48)/8));
+ $('#garden').innerHTML=sceneSvg(W,act,ch);
+ $('#chip').textContent='🌱 '+W+'/'+TOT;
+ $('#gw').textContent=W+' 💧';$('#gb').textContent=bl+'/6';
+ $('#gl').textContent=W<8?'Penyemai Pemula':W<16?'Penyiram Rajin':W<32?'Tukang Kebun':W<48?'Ahli Botani':'Raja Kebun Lingkaran';
+ $('#gbar').style.width=Math.round((W<48?(W%8)/8:1)*100)+'%';
+ $('#gnext').textContent=W<48?(8-W%8)+' jawaban benar lagi sampai '+SP[act].n+' mekar.':'Semua tanaman sudah mekar. Kebunmu sempurna!';
+ $('#gmsg').textContent=W==0?'Halo, aku Lingko! Jawab soal dengan benar untuk menyiram tanamanmu.':W<8?'Bagus! Tunas pertamamu mulai tumbuh. Terus siram ya.':W<48?'Sudah '+bl+' tanaman mekar. Lanjut kumpulkan yang lain!':'Luar biasa! Kebunmu penuh bunga. Kamu jagoan lingkaran!';
+ const has=(p,n)=>Array.from({length:n},(_,i)=>gs.has(p+i)).every(Boolean);
+ const B=[['🔗','Si Penjodoh','Menjodohkan benar semua',has('j',5)],['✏️','Raja Isian','Isian benar semua',has('i',5)],['🎯','Jago Pilgan','Pilihan ganda benar semua',has('p',5)],['📚','Penakluk Bank','20 soal bank benar',Array.from(gs).filter(k=>k[0]=='b').length>=20],['🌸','Kebun Mekar','Semua tanaman mekar',W>=48],['🧪','Ilmuwan Muda','Selesaikan 5 lab maya',['L0','L1','L2','L3','L4'].every(k=>gs.has(k))]];
+ $('#gbd').innerHTML=B.map(b=>`<div class="bdg${b[3]?' on':''}"><b>${b[0]} ${b[1]}</b><br>${b[2]}</div>`).join('')}
+function award(k,quiet){
+ if(gs.has(k))return;const b=gs.size;gs.add(k);
+ try{localStorage.setItem(KEYS,JSON.stringify(Array.from(gs)))}catch(e){}
+ let ch=-1,msg='+1 💧 Tanamanmu disiram',bl=false;
+ if(b<48){const i=Math.floor(b/8),w0=b%8,w1=w0+1;if(STG(w1)!=STG(w0))ch=i;
+  if(w1==8){msg='🌸 '+SP[i].n+' mekar!';bl=true}else if(ch>=0)msg=STG(w1)==1?'🌱 Tunas '+SP[i].n+' muncul!':'🍃 '+SP[i].n+' mulai berdaun!'}
+ else msg='+1 💧 Bonus siraman!';
+ renderGarden(ch);if(!quiet){toast(msg);sfx(bl)}if(bl)boom()}
+let rst=0;
+$('#greset').onclick=()=>{const b=$('#greset');if(!rst){rst=1;b.textContent='Yakin? Tekan lagi untuk hapus';setTimeout(()=>{rst=0;b.textContent='Mulai kebun baru'},3000);return}
+ rst=0;gs=new Set();try{localStorage.removeItem(KEYS)}catch(e){}renderGarden(-1);b.textContent='Mulai kebun baru'};
+$('#chip').onclick=()=>nav.children[T.findIndex(x=>x[0]=='kebun')].click();
+
+/* Audio (disintesis dengan Web Audio, tanpa berkas) */
+let ctx=null,bus=null,mg=null,sg=null,noiseBuf=null,timer=null,step=0,nextT=0,playing=false,vol=.5,sfxOn=true,vibe=0;
+const MF=m=>440*Math.pow(2,(m-69)/12);
+const VB=[
+ {bpm:76,sw:.14,wave:'triangle',fc:1400,len:1,prog:[[48,55,59,64],[45,55,60,64],[50,57,60,65],[43,55,59,65]],kick:[0,5],snare:[2,6],hat:.035,mel:.32,sc:[72,74,76,79,81,84]},
+ {bpm:104,sw:.05,wave:'triangle',fc:2400,len:.6,prog:[[48,55,64,67],[43,55,62,67],[45,57,64,69],[41,57,65,69]],kick:[0,3,4],snare:[2,6],hat:.05,mel:.45,sc:[76,79,81,84,86,88]},
+ {bpm:60,sw:0,wave:'sine',fc:1100,len:1.4,prog:[[45,52,59,64],[41,52,57,64],[48,55,59,64],[43,50,59,62]],kick:[],snare:[],hat:0,mel:.18,sc:[69,72,74,76,79,81]}];
+function initAudio(){
+ if(ctx)return true;const A=window.AudioContext||window.webkitAudioContext;if(!A)return false;
+ try{ctx=new A();mg=ctx.createGain();mg.gain.value=0;mg.connect(ctx.destination);bus=ctx.createGain();bus.connect(mg);
+  const dl=ctx.createDelay(1),fb=ctx.createGain(),wet=ctx.createGain();dl.delayTime.value=.375;fb.gain.value=.32;wet.gain.value=.3;
+  bus.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(mg);
+  sg=ctx.createGain();sg.gain.value=.22;sg.connect(ctx.destination);
+  noiseBuf=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  return true}catch(e){ctx=null;return false}}
+function tone(m,t,dur,v,type,fc,dest){
+ const o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();
+ f.type='lowpass';f.frequency.value=fc;o.type=type;o.frequency.value=MF(m);o.detune.value=(Math.random()-.5)*10;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ o.connect(f);f.connect(g);g.connect(dest||bus);o.start(t);o.stop(t+dur+.05)}
+function nz(t,dur,ft,fr,v){
+ const s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
+ s.buffer=noiseBuf;f.type=ft;f.frequency.value=fr;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ s.connect(f);f.connect(g);g.connect(bus);s.start(t);s.stop(t+dur+.02)}
+function kick(t){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(45,t+.12);g.gain.setValueAtTime(.55,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.connect(g);g.connect(bus);o.start(t);o.stop(t+.32)}
+function playStep(st,t){
+ const V=VB[vibe],ch=V.prog[(st>>3)%V.prog.length],b=st%8,beat=60/V.bpm;
+ if(b==0||b==4)ch.forEach((m,i)=>tone(m,t+i*.018,beat*(b==0?3.2:1.8)*V.len,b==0?.075:.05,V.wave,V.fc));
+ if(b==0||(b==5&&vibe!=2))tone(ch[0]-12,t,beat*1.1*V.len,.17,'sine',420);
+ if(V.kick.indexOf(b)>=0)kick(t);
+ if(V.snare.indexOf(b)>=0)nz(t,.16,'bandpass',1900,.13);
+ if(V.hat)nz(t,.045,'highpass',8000,b%2?V.hat*.6:V.hat);
+ if(b%2==0&&Math.random()<V.mel)tone(V.sc[Math.floor(Math.random()*V.sc.length)],t+.01,beat*.9,.05,'sine',3000)}
+function sched(){const V=VB[vibe],e=60/V.bpm/2;
+ while(nextT<ctx.currentTime+.25){playStep(step,nextT);nextT+=e*(step%2?1-V.sw:1+V.sw);step=(step+1)%(V.prog.length*8)}}
+function startMusic(){
+ if(!initAudio())return;if(ctx.resume)ctx.resume();
+ clearInterval(timer);step=0;nextT=ctx.currentTime+.1;mg.gain.setTargetAtTime(vol,ctx.currentTime,.3);
+ timer=setInterval(sched,60);playing=true;uiMusic()}
+function stopMusic(){clearInterval(timer);if(ctx)mg.gain.setTargetAtTime(0,ctx.currentTime,.12);playing=false;uiMusic()}
+function uiMusic(){const b=$('#mplay');b.textContent=playing?'⏸':'🎵';b.setAttribute('aria-pressed',playing);b.setAttribute('aria-label',playing?'Jeda musik':'Putar musik');b.classList.toggle('on',playing)}
+function sfx(bloom){
+ if(!sfxOn||!initAudio())return;if(ctx.resume)ctx.resume();const t=ctx.currentTime;
+ if(bloom)[72,76,79,84,88].forEach((m,i)=>tone(m,t+i*.09,.5,.5,'sine',6000,sg));
+ else{tone(84,t,.35,.5,'sine',6000,sg);tone(91,t+.08,.4,.4,'sine',6000,sg)}}
+$('#mplay').onclick=()=>playing?stopMusic():startMusic();
+$('#mset').onclick=()=>{const o=$('#mpanel').classList.toggle('open');$('#mset').setAttribute('aria-expanded',o)};
+$('#mv').onchange=()=>{vibe=+$('#mv').value;if(playing)startMusic()};
+$('#mvol').oninput=()=>{vol=$('#mvol').value/100;if(playing&&ctx)mg.gain.setTargetAtTime(vol,ctx.currentTime,.05)};
+$('#msfx').onchange=()=>{sfxOn=$('#msfx').checked};
+document.addEventListener('visibilitychange',()=>{if(!playing||!ctx)return;
+ if(document.hidden){clearInterval(timer);mg.gain.setTargetAtTime(0,ctx.currentTime,.1)}
+ else{nextT=ctx.currentTime+.1;mg.gain.setTargetAtTime(vol,ctx.currentTime,.2);timer=setInterval(sched,60)}});
+
+/* ===== Beranda, eksplorasi lanjutan, ujian akhir ===== */
+const DEV={nama:'Rianti Sianturi, S.Pd, M.Pd',jabatan:'Wakil Kepala Sekolah Bidang Kurikulum',sekolah:'SMAN 4 Medan',kota:'Medan'};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let NAME='';try{NAME=localStorage.getItem('lk_nama')||''}catch(e){}
+function hi(){$('#hi').textContent=NAME?'Halo, '+NAME+'! Semoga petualanganmu menyenangkan.':'Isi namamu agar tampil di sertifikat.';$('#nm').value=NAME}
+$('#nmok').onclick=()=>{NAME=$('#nm').value.trim().slice(0,30);try{localStorage.setItem('lk_nama',NAME)}catch(e){}hi();toast(NAME?'Nama tersimpan':'Nama dikosongkan')};
+hi();
+if(DEV.nama){$('#dev').hidden=false;$('#dev').innerHTML='<h2>Pengembang</h2><p><b>'+esc(DEV.nama)+'</b><br>'+esc(DEV.jabatan)+'<br>'+esc(DEV.sekolah)+'</p><p class="mute">Media pembelajaran interaktif Matematika · Fase F · '+new Date().getFullYear()+'</p>';
+ const f=document.createElement('footer');f.className='foot';f.textContent='Dikembangkan oleh '+DEV.nama+' · '+DEV.sekolah+' · Matematika Fase F';document.querySelector('main .wrap').appendChild(f)}
+$('#mtheme').onclick=()=>{const d=document.documentElement,cur=d.dataset.theme||(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');d.dataset.theme=cur=='dark'?'light':'dark'};
+
+/* Pemantik: roda menggelinding */
+function roll(){const th=+$('#rl').value,x=44+th/360*2*Math.PI*30;
+ $('#rlv').textContent=th;$('#rlw').setAttribute('transform','translate('+x+' 70) rotate('+th+')');$('#rlt').setAttribute('x2',x);
+ $('#rle').innerHTML='<math display="block"><mfrac><mn>'+th+'</mn><mn>360</mn></mfrac><mo>×</mo><mn>2</mn><mo>×</mo><mfrac><mn>22</mn><mn>7</mn></mfrac><mo>×</mo><mn>21</mn><mo>=</mo><mn>'+fmt(th/360*132)+'</mn><mtext>&nbsp;cm</mtext></math>'}
+$('#rl').addEventListener('input',roll);roll();
+
+/* Simulasi tali busur */
+function drawCh(){
+ const r=+$('#cr').value,dm=$('#cd');dm.max=r-.5;if(+dm.value>r-.5)dm.value=r-.5;
+ const d=+dm.value,k=10,cx=150,cy=115,h=Math.sqrt(r*r-d*d),y=cy-d*k,x1=cx-h*k,x2=cx+h*k;
+ $('#crv').textContent=r;$('#cdv').textContent=fmt(d);
+ $('#sch').innerHTML=`<circle cx="${cx}" cy="${cy}" r="${r*k}" fill="#22D3EE22" stroke="#22D3EE" stroke-width="2"/><path d="M${cx} ${cy}L${cx} ${y}M${cx} ${cy}L${x1} ${y}" stroke="#fff" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/><line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="#FF5C8A" stroke-width="4" stroke-linecap="round"/>`+(d>0?`<path d="M${cx} ${y+9}H${cx+9}V${y}" stroke="#FFB547" stroke-width="1.5" fill="none"/>`:'')+`<circle cx="${cx}" cy="${cy}" r="3" fill="#fff"/><text x="${cx-14}" y="${cy+16}">O</text><text x="${x1-14}" y="${y-6}">A</text><text x="${x2+6}" y="${y-6}">B</text><text x="${cx+5}" y="${(cy+y)/2+4}" style="fill:#FFB547">d</text><text x="${cx+(x1-cx)/2-16}" y="${(cy+y)/2+4}">r</text>`;
+ $('#ceq').innerHTML='<math display="block"><mtext>Tali busur </mtext><mo>=</mo><mn>2</mn><mo>×</mo><msqrt><msup><mn>'+r+'</mn><mn>2</mn></msup><mo>−</mo><msup><mn>'+fmt(d)+'</mn><mn>2</mn></msup></msqrt><mo>=</mo><mn>'+fmt(2*h)+'</mn><mtext>&nbsp;cm</mtext></math>'}
+['cr','cd'].forEach(i=>$('#'+i).addEventListener('input',drawCh));drawCh();
+
+/* Simulasi garis singgung */
+function drawTg(){
+ const r=+$('#gr').value,dd=$('#gd');dd.min=r+1;if(+dd.value<r+1)dd.value=r+1;
+ const d=+dd.value,k=9,ox=55,oy=115,cs=r/d,sn=Math.sqrt(1-cs*cs),tx=ox+r*cs*k,ty=oy-r*sn*k,px=ox+d*k,L=Math.sqrt(d*d-r*r);
+ $('#grv').textContent=r;$('#gdv').textContent=d;
+ const u=(ax,ay,bx,by)=>{const l=Math.hypot(bx-ax,by-ay);return[(bx-ax)/l,(by-ay)/l]},a=u(tx,ty,ox,oy),b=u(tx,ty,px,oy),s=9;
+ const mk=`M${tx+a[0]*s} ${ty+a[1]*s}L${tx+(a[0]+b[0])*s} ${ty+(a[1]+b[1])*s}L${tx+b[0]*s} ${ty+b[1]*s}`;
+ $('#sgs').innerHTML=`<circle cx="${ox}" cy="${oy}" r="${r*k}" fill="#22D3EE22" stroke="#22D3EE" stroke-width="2"/><path d="M${tx} ${2*oy-ty}L${px} ${oy}" stroke="#FF5C8A" stroke-width="2.5" stroke-dasharray="5 4" opacity=".6"/><path d="M${ox} ${oy}L${px} ${oy}" stroke="#fff" stroke-width="1" stroke-dasharray="3 4" opacity=".6"/><path d="M${ox} ${oy}L${tx} ${ty}" stroke="#fff" stroke-width="1.5"/><path d="M${tx} ${ty}L${px} ${oy}" stroke="#FF5C8A" stroke-width="4" stroke-linecap="round"/><path d="${mk}" stroke="#FFB547" stroke-width="1.5" fill="none"/><circle cx="${ox}" cy="${oy}" r="3" fill="#fff"/><circle cx="${tx}" cy="${ty}" r="3.5" fill="#FFB547"/><circle cx="${px}" cy="${oy}" r="4" fill="#FF5C8A"/><text x="${ox-14}" y="${oy+16}">O</text><text x="${tx-6}" y="${ty-8}">T</text><text x="${px+8}" y="${oy+4}">P</text><text x="${(tx+px)/2+6}" y="${(ty+oy)/2-6}" style="fill:#FF5C8A">PT = ${fmt(L)}</text>`;
+ $('#geq').innerHTML='<math display="block"><mtext>PT </mtext><mo>=</mo><msqrt><msup><mn>'+d+'</mn><mn>2</mn></msup><mo>−</mo><msup><mn>'+r+'</mn><mn>2</mn></msup></msqrt><mo>=</mo><mn>'+fmt(L)+'</mn><mtext>&nbsp;cm</mtext></math>'}
+['gr','gd'].forEach(i=>$('#'+i).addEventListener('input',drawTg));drawTg();
+
+/* Ujian akhir */
+const TLN={S:'Sudut',B:'Busur',J:'Juring',T:'Tali busur',D:'Segitiga',G:'Singgung',K:'Kontekstual',E:'Jarak di Bumi',Q:'Teorema'};
+let EX=null,BEST=0;try{BEST=+localStorage.getItem('lk_best')||0}catch(e){}
+const exUi=()=>{$('#exBest').textContent='Nilai terbaik: '+(BEST||'-')};
+function exPick(){const by={};BK.forEach((q,i)=>{(by[q[0]]=by[q[0]]||[]).push(i)});const plan={S:2,B:1,J:1,T:1,D:1,G:1,K:1,E:1,Q:1};let ids=[];Object.keys(plan).forEach(k=>{ids=ids.concat(shuf(by[k]).slice(0,plan[k]))});return shuf(ids)}
+function exStart(){EX={ids:exPick(),i:0,ans:[],t0:Date.now()};$('#exIntro').hidden=true;exShow()}
+function exShow(){
+ const n=EX.ids.length,q=BK[EX.ids[EX.i]],b=$('#exBody');
+ b.innerHTML='<div class="card reveal"><div class="bar" role="progressbar" aria-label="Progres ujian"><i style="width:'+Math.round(EX.i/n*100)+'%"></i></div><div class="q"><span class="tag">Soal '+(EX.i+1)+' dari '+n+'</span><span class="tag">'+TL[q[0]]+'</span><br>'+q[2]+'</div><div id="exIn"></div><p><button class="btn" id="exNext" type="button" disabled>'+(EX.i==n-1?'Selesai':'Lanjut')+'</button></p></div>';
+ const inn=$('#exIn'),nx=$('#exNext');
+ if(q[3]){const bs=[];q[3].forEach((t,j)=>{const x=document.createElement('button');x.type='button';x.className='opt';x.textContent=String.fromCharCode(65+j)+'. '+t;x.onclick=()=>{bs.forEach(y=>y.classList.remove('sel'));x.classList.add('sel');EX.ans[EX.i]=j;nx.disabled=false};bs.push(x);inn.appendChild(x)})}
+ else{inn.innerHTML='<input type="text" inputmode="decimal" size="12" id="exV" aria-label="Jawaban">';const v=$('#exV');v.oninput=()=>{EX.ans[EX.i]=v.value;nx.disabled=!v.value.trim()};v.onkeydown=e=>{if(e.key=='Enter'&&!nx.disabled)nx.click()};v.focus()}
+ nx.onclick=()=>{EX.i++;EX.i<n?exShow():exEnd()};scrollTo(0,0)}
+let CERTX='';
+function certNo(nm,sc){let h=0;for(const ch of nm+sc)h=(h*31+ch.charCodeAt(0))%10007;return 'LK-'+new Date().getFullYear()+'-'+('0000'+((h*13+sc)%10000)).slice(-4)}
+function certSvg(nm,sc,pr){
+ const d=new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),
+ T=(x,y,sz,fill,txt,ex)=>'<text x="'+x+'" y="'+y+'" text-anchor="middle" style="font:'+sz+' Georgia,serif;fill:'+fill+';'+(ex||'')+'">'+txt+'</text>';
+ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 566" class="cert" role="img" aria-label="Sertifikat">'
+ +'<defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B1437"/><stop offset=".55" stop-color="#2A1B7A"/><stop offset="1" stop-color="#6B3FE0"/></linearGradient><radialGradient id="cs" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#F2A33A"/></radialGradient></defs>'
+ +'<rect width="800" height="566" fill="#FFFDF7"/>'
+ +'<circle cx="690" cy="470" r="150" fill="none" stroke="#7C5CFF" stroke-opacity=".08" stroke-width="2"/><circle cx="690" cy="470" r="105" fill="none" stroke="#22D3EE" stroke-opacity=".12" stroke-width="2"/><circle cx="110" cy="130" r="120" fill="none" stroke="#FFB547" stroke-opacity=".14" stroke-width="2"/>'
+ +'<rect x="14" y="14" width="772" height="538" rx="20" fill="none" stroke="url(#cg)" stroke-width="7"/><rect x="30" y="30" width="740" height="506" rx="12" fill="none" stroke="#FFB547" stroke-width="1.5"/>'
+ +'<path d="M31 31H121A90 90 0 0 1 31 121Z" fill="#7C5CFF" fill-opacity=".14"/><path d="M769 31H679A90 90 0 0 0 769 121Z" fill="#22D3EE" fill-opacity=".16"/><path d="M31 535H121A90 90 0 0 0 31 445Z" fill="#FFB547" fill-opacity=".2"/><path d="M769 535H679A90 90 0 0 1 769 445Z" fill="#FF5C8A" fill-opacity=".14"/>'
+ +T(400,62,'700 13px','#2A1B7A','SMA NEGERI 4 MEDAN','letter-spacing:3px')+T(400,80,'12px','#51627C','Media Pembelajaran Interaktif Matematika · Fase F')
+ +'<path d="M400 106C397 92 385 88 376 91C379 101 389 108 400 106Z" fill="#46C98A"/><path d="M400 106C403 92 415 88 424 91C421 101 411 108 400 106Z" fill="#2FA36B"/><circle cx="400" cy="128" r="26" fill="#FFD166"/><circle cx="391" cy="126" r="2.8" fill="#13233F"/><circle cx="409" cy="126" r="2.8" fill="#13233F"/><path d="M390 135Q400 144 410 135" stroke="#13233F" stroke-width="2.4" fill="none" stroke-linecap="round"/>'
+ +T(400,208,'700 40px','#2A1B7A','SERTIFIKAT','letter-spacing:6px')+T(400,232,'15px','#51627C','Penyelesaian Ujian Akhir · Materi Lingkaran')
+ +T(400,264,'italic 14px','#51627C','diberikan kepada')+T(400,313,'italic 700 40px','#13233F',esc(nm||'Peserta Didik'))
+ +'<line x1="210" y1="326" x2="590" y2="326" stroke="#FFB547" stroke-width="2"/>'
+ +T(400,352,'13.5px','#13233F','telah menyelesaikan Ujian Akhir materi Lingkaran (sudut, busur, juring, tali busur, segitiga,')
+ +T(400,370,'13.5px','#13233F','garis singgung, teorema lingkaran, dan jarak di permukaan Bumi) dengan hasil berikut.')
+ +'<path d="M126 488L116 528L137 518L148 534L152 490Z" fill="#6B3FE0"/><path d="M174 488L184 528L163 518L152 534L148 490Z" fill="#8B6BFF"/><circle cx="150" cy="450" r="44" fill="url(#cs)" stroke="#fff" stroke-width="3"/><circle cx="150" cy="450" r="37" fill="none" stroke="#B9770E" stroke-width="1.5" stroke-dasharray="3 3"/>'
+ +T(150,438,'11px','#7A4A06','NILAI','letter-spacing:2px')+T(150,470,'700 32px','#13233F',sc)
+ +T(375,420,'12px','#51627C','Predikat')+T(375,448,'700 17px','#19A27D',esc(pr))+T(375,472,'12px','#51627C',esc(CERTX))
+ +T(640,410,'12px','#13233F',esc(DEV.kota)+', '+d)+T(640,428,'11.5px','#51627C','Wakil Kepala Sekolah')+T(640,444,'11.5px','#51627C','Bidang Kurikulum')
+ +'<line x1="535" y1="492" x2="745" y2="492" stroke="#13233F" stroke-width="1"/>'+T(640,510,'700 14px','#13233F',esc(DEV.nama))
+ +T(375,522,'10px','#8A97B8','No. '+certNo(nm||'',sc),'letter-spacing:1px')
+ +'</svg>'}
+function certDl(nm,sc,pr){
+ const img=new Image();
+ img.onerror=()=>toast('Gagal membuat gambar sertifikat');
+ img.onload=()=>{const c=document.createElement('canvas');c.width=1600;c.height=1132;c.getContext('2d').drawImage(img,0,0,1600,1132);
+  c.toBlob(async bl=>{
+   try{const dl=(window.claude&&claude.use)?await claude.use('downloads'):null;
+    if(!dl||!bl){toast('Unduhan belum tersedia di tampilan ini. Gunakan tangkapan layar.');return}
+    await dl.save({filename:'sertifikat-lingkaran.png',data:bl});toast('Sertifikat tersimpan 🎓')}
+   catch(e){if(!e||e.code!='declined')toast('Sertifikat tidak bisa disimpan. Gunakan tangkapan layar.')}
+  },'image/png')};
+ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(certSvg(nm,sc,pr))}
+
+/* ===== Riwayat ===== */
+let RW=[];try{RW=JSON.parse(localStorage.getItem('lk_riwayat_v1')||'[]')}catch(e){}
+let RWDB=null,RWOK=null,RWID=null;
+(async()=>{try{RWDB=await claude.use('db');const u=await claude.use('user');RWID=u?await u.id():null;if(!RWID)RWDB=null}catch(e){RWDB=null}RWUi()})();
+function RWUi(){
+ const t=$('#rwtab');if(!t)return;
+ t.innerHTML='<tr><th>Waktu</th><th>Kegiatan</th><th>Hasil</th></tr>'+(RW.length?RW.slice().reverse().slice(0,25).map(r=>'<tr><td>'+esc(new Date(r.t).toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}))+'</td><td>'+esc(r.jenis)+'</td><td>'+esc(r.hasil)+'</td></tr>').join(''):'<tr><td colspan="3" class="mute">Belum ada riwayat. Selesaikan lab atau ujian akhir.</td></tr>');
+ $('#rwnote').textContent='Riwayat disimpan di perangkat ini'+(RWDB?(RWOK===false?'. Pengiriman ke guru gagal, riwayat tetap tersimpan di sini.':' dan dikirim ke buku nilai guru.'):'.')}
+function riw(jenis,hasil,nilai){
+ const r={t:new Date().toISOString(),nama:NAME||'Tanpa nama',jenis:jenis,hasil:hasil,nilai:nilai==null?'':nilai};
+ RW.push(r);if(RW.length>100)RW.shift();try{localStorage.setItem('lk_riwayat_v1',JSON.stringify(RW))}catch(e){}
+ if(RWDB){RWDB.doc('riwayat/'+RWID).set({nama:NAME||'Tanpa nama',diperbarui:r.t,entri:RW.slice(-50)}).then(()=>{RWOK=true;RWUi()}).catch(()=>{RWOK=false;RWUi()})}
+ RWUi()}
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='rwdl'){const q=v=>'"'+String(v).replace(/"/g,'""')+'"';const csv='Waktu,Nama,Kegiatan,Hasil,Nilai\n'+RW.map(r=>[r.t,r.nama,r.jenis,r.hasil,r.nilai].map(q).join(',')).join('\n');
+ claude.use('downloads').then(d=>{if(!d){toast('Unduhan tidak tersedia di tampilan ini');return}return d.save({filename:'riwayat-lingkaran.csv',data:csv})}).catch(()=>{})}});
+function exEnd(){
+ const n=EX.ids.length;let ok=0;const by={},wrong=[];
+ EX.ids.forEach((id,i)=>{const q=BK[id],a=EX.ans[i];let c;
+  if(q[3])c=a===q[4];else{const v=parseFloat(String(a).replace(',','.').replace(/[^0-9.\-]/g,''));c=!isNaN(v)&&Math.abs(v-q[4])<.01}
+  const t=by[q[0]]=by[q[0]]||[0,0];t[1]++;if(c){ok++;t[0]++;award('b'+id,true)}else wrong.push([q,a])});
+ const sc=Math.round(ok/n*100),sec=Math.round((Date.now()-EX.t0)/1000);riw('Ujian akhir','Benar '+ok+' dari '+n+' soal ('+Object.keys(by).map(k=>TLN[k]+' '+by[k][0]+'/'+by[k][1]).join('; ')+')',sc);
+ if(sc>BEST){BEST=sc;try{localStorage.setItem('lk_best',BEST)}catch(e){}}exUi();CERTX='Topik dikuasai: '+Object.keys(by).filter(k=>by[k][0]==by[k][1]).length+' dari '+Object.keys(by).length;
+ const pr=sc>=90?'Sangat Baik · Juara Lingkaran':sc>=80?'Baik':sc>=70?'Cukup Baik':'Perlu berlatih lagi',circ=2*Math.PI*52;
+ let h='<div class="card reveal"><div class="gh"><svg viewBox="0 0 120 120" style="width:120px;flex:none" role="img" aria-label="Nilai '+sc+'"><circle cx="60" cy="60" r="52" fill="none" stroke="#E6EEFB" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="#19C79A" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+circ*(1-sc/100)+'" transform="rotate(-90 60 60)"/><text x="60" y="69" text-anchor="middle" style="font-size:30px;font-weight:800;fill:#13233F">'+sc+'</text></svg><div><h2>'+pr+'</h2><p>Benar '+ok+' dari '+n+' soal · waktu '+Math.floor(sec/60)+' menit '+sec%60+' detik.<br>'+(sc>=90?'Luar biasa! Kamu layak jadi juara lingkaran. 🏆':sc>=70?'Bagus sekali! Sedikit lagi menuju sempurna. 🌟':'Semangat! Pelajari pembahasannya lalu coba lagi, kamu pasti bisa. 💪')+'</p></div></div>';
+ h+='<h3>Penguasaan per topik</h3>'+Object.keys(by).map(k=>'<div class="tb"><span class="l">'+TLN[k]+'</span><div class="bar"><i style="width:'+Math.round(by[k][0]/by[k][1]*100)+'%"></i></div><span>'+by[k][0]+'/'+by[k][1]+'</span></div>').join('');
+ const weak=Object.keys(by).filter(k=>by[k][0]<by[k][1]).map(k=>TLN[k]);
+ h+='<p style="margin-top:10px">'+(weak.length?'Perlu diperkuat: <b>'+weak.join(', ')+'</b>. <button class="btn alt" data-go="materi" type="button">Buka materi</button>':'Semua topik dikuasai. Hebat!')+'</p></div>';
+ if(sc>=70)h+='<div class="card reveal"><h2>🎓 Sertifikat</h2><label for="cn">Nama di sertifikat</label><div class="row"><input type="text" id="cn" maxlength="30" value="'+esc(NAME)+'"><button class="btn" id="cdl" type="button">⬇️ Unduh sertifikat</button></div><div id="cprev"></div></div>';
+ if(wrong.length)h+='<div class="card reveal"><h2>Pembahasan soal yang belum tepat</h2>'+wrong.map(([q,a])=>'<div class="ex"><b>'+q[2]+'</b><br>Jawabanmu: '+esc(q[3]?(a==null?'-':String.fromCharCode(65+a)+'. '+q[3][a]):(a||'-'))+' · Kunci: '+(q[3]?String.fromCharCode(65+q[4])+'. '+q[3][q[4]]:q[4])+'<br>'+M(q[5])+'</div>').join('')+'</div>';
+ h+='<p class="row"><button class="btn" id="exAgain" type="button">🔁 Ulangi ujian</button><button class="btn alt" data-go="kebun" type="button">🌱 Lihat kebun</button></p>';
+ $('#exBody').innerHTML=h;scrollTo(0,0);
+ if(sc>=70){const rc=()=>{$('#cprev').innerHTML=certSvg($('#cn').value.trim(),sc,pr)};rc();$('#cn').oninput=rc;$('#cdl').onclick=()=>certDl($('#cn').value.trim(),sc,pr)}
+ $('#exAgain').onclick=exStart;toast(ok+' dari '+n+' benar. Kebunmu diperbarui.');if(sc==100)boom()}
+$('#exGo').onclick=exStart;exUi();
+/* ===== Pujian dan semangat ===== */
+const PUJI=['Mantap! Jawabanmu tepat. 🎉','Keren, kamu paham konsepnya! ⭐','Luar biasa! Pertahankan ya. 🚀','Tepat sekali! Kebunmu makin subur. 🌱','Hebat! Kamu makin jago lingkaran. 🏅','Betul! Otakmu lagi on fire. 🔥'];
+const SEMANGAT=['Hampir! Coba cek lagi langkahnya. 💪','Tidak apa-apa, salah itu bagian dari belajar. 🌈','Semangat! Baca pembahasannya lalu coba lagi. 📘','Kamu pasti bisa, ulangi pelan-pelan. ✨','Jangan menyerah, tiap kesalahan bikin makin paham. 🌟'];
+let streak=0,cht=null;
+function oops(){if(!sfxOn||!initAudio())return;if(ctx.resume)ctx.resume();const t=ctx.currentTime;tone(60,t,.3,.35,'sine',1500,sg);tone(57,t+.12,.4,.3,'sine',1500,sg)}
+function cheer(ok){
+ streak=ok?streak+1:0;
+ const m=ok?(streak>=3?'Beruntun '+streak+' jawaban benar! 🔥':PUJI[Math.floor(Math.random()*PUJI.length)]):SEMANGAT[Math.floor(Math.random()*SEMANGAT.length)];
+ $('#cheerT').textContent=m;$('#cmo').setAttribute('d',ok?'M36 74 Q50 92 64 74':'M40 80 Q50 84 60 80');
+ $('#cheer').classList.add('show');clearTimeout(cht);cht=setTimeout(()=>$('#cheer').classList.remove('show'),2800);
+ if(!ok)oops();return m}
+
+/* ===== Lab maya ===== */
+const D2R=Math.PI/180;let LB=0,LROWS=[],LCUR=null;
+function dragSvg(svg,fn){const mv=e=>{const r=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal;fn((e.clientX-r.left)/r.width*vb.width,(e.clientY-r.top)/r.height*vb.height)};
+ svg.onpointerdown=e=>{if(svg.setPointerCapture)try{svg.setPointerCapture(e.pointerId)}catch(x){}mv(e);svg.onpointermove=mv};
+ svg.onpointerup=svg.onpointercancel=()=>{svg.onpointermove=null}}
+function lab1Draw(){
+ const th=+$('#lth').value,ph=+$('#lph').value,cx=150,cy=125,R=95,pa=a=>[cx+R*Math.cos(a*D2R),cy+R*Math.sin(a*D2R)],A=pa(-th/2),B=pa(th/2),P=pa(ph);
+ $('#lthv').textContent=th;$('#lphv').textContent=ph;
+ const va=[A[0]-P[0],A[1]-P[1]],vb=[B[0]-P[0],B[1]-P[1]],la=Math.hypot(va[0],va[1]),lb=Math.hypot(vb[0],vb[1]);
+ let ang=null;if(la>3&&lb>3)ang=Math.acos(Math.max(-1,Math.min(1,(va[0]*vb[0]+va[1]*vb[1])/(la*lb))))/D2R;
+ const dd=((ph+180)%360+360)%360-180,minor=Math.abs(dd)<th/2;
+ $('#lsvg').innerHTML=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="#22D3EE18" stroke="#22D3EE" stroke-width="2"/><path d="M${A[0]} ${A[1]}A${R} ${R} 0 0 1 ${B[0]} ${B[1]}" fill="none" stroke="#FF5C8A" stroke-width="5"/><path d="M${cx} ${cy}L${A[0]} ${A[1]}M${cx} ${cy}L${B[0]} ${B[1]}" stroke="#fff" stroke-width="1.8"/><path d="M${P[0]} ${P[1]}L${A[0]} ${A[1]}M${P[0]} ${P[1]}L${B[0]} ${B[1]}" stroke="#FFB547" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="3" fill="#fff"/><circle cx="${A[0]}" cy="${A[1]}" r="4" fill="#fff"/><circle cx="${B[0]}" cy="${B[1]}" r="4" fill="#fff"/><circle cx="${P[0]}" cy="${P[1]}" r="9" fill="#FFB547" stroke="#fff" stroke-width="2"/><text x="${A[0]+8}" y="${A[1]-6}">A</text><text x="${B[0]+8}" y="${B[1]+14}">B</text><text x="${cx-14}" y="${cy+16}">O</text><text x="${P[0]+(P[0]<cx?-20:12)}" y="${P[1]+(P[1]<cy?-10:20)}" style="fill:#FFB547">P</text>`;
+ $('#lout').innerHTML='<div>∠AOB<b>'+th+'°</b></div><div>∠APB<b>'+(ang==null?'-':fmt(ang)+'°')+'</b></div><div>Posisi P<b>'+(minor?'busur kecil':'busur besar')+'</b></div>';
+ LCUR=ang==null?null:[ph+'°',th+'°',fmt(ang)+'°',fmt(th/ang)]}
+function lab2Draw(){
+ const n=+$('#pn').value,r=+$('#pr').value,cx=150,cy=125,R=100,th=360/n,arc=th/360*2*22/7*r,area=th/360*22/7*r*r;
+ $('#pnv').textContent=n;
+ let o=`<circle cx="${cx}" cy="${cy}" r="${R+8}" fill="#E8903A"/>`;
+ for(let i=0;i<n;i++){const a1=(-90+i*th)*D2R,a2=(-90+(i+1)*th)*D2R;o+=`<path d="M${cx} ${cy}L${cx+R*Math.cos(a1)} ${cy+R*Math.sin(a1)}A${R} ${R} 0 0 1 ${cx+R*Math.cos(a2)} ${cy+R*Math.sin(a2)}Z" fill="${i==0?'#FFE9A8':'#FFC857'}" stroke="#E8903A" stroke-width="2"/>`}
+ for(let i=0;i<n;i++){const m=(-90+(i+.5)*th)*D2R;o+=`<circle cx="${cx+R*.62*Math.cos(m)}" cy="${cy+R*.62*Math.sin(m)}" r="${Math.max(3,Math.min(9,R*Math.sin(th/2*D2R)*.3))}" fill="#E0524D"/>`}
+ const m0=(-90+th/2)*D2R;o+=`<text x="${cx+34*Math.cos(m0)}" y="${cy+34*Math.sin(m0)+4}" text-anchor="middle" style="fill:#13233F;font-weight:700;font-size:12px">${fmt(th)}°</text>`;
+ $('#lsvg').innerHTML=o;
+ $('#lout').innerHTML='<div>θ tiap potong<b>'+fmt(th)+'°</b></div><div>Panjang busur<b>'+fmt(arc)+' cm</b></div><div>Luas 1 juring<b>'+fmt(area)+' cm²</b></div><div>Jumlah luas<b>'+fmt(n*area)+' cm²</b></div>';
+ LCUR=[n,fmt(th)+'°',fmt(arc)+' cm',fmt(area)+' cm²',fmt(n*area)+' cm²']}
+function lab3Draw(){
+ const d=+$('#ld').value,a=+$('#la').value,r=4,k=7,cx=150,cy=125,al=Math.acos(r/d)/D2R;
+ $('#ldv').textContent=fmt(d);$('#lav').textContent=a;
+ const P=[cx+d*k*Math.cos(a*D2R),cy+d*k*Math.sin(a*D2R)],T=s=>[cx+r*k*Math.cos((a+s*al)*D2R),cy+r*k*Math.sin((a+s*al)*D2R)],T1=T(1),T2=T(-1);
+ const len=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1])/k,p1=len(P,T1),p2=len(P,T2);
+ const angT=t=>{const u=[cx-t[0],cy-t[1]],v=[P[0]-t[0],P[1]-t[1]];return Math.acos(Math.max(-1,Math.min(1,(u[0]*v[0]+u[1]*v[1])/(Math.hypot(u[0],u[1])*Math.hypot(v[0],v[1])))))/D2R},ot=angT(T1);
+ $('#lsvg').innerHTML=`<circle cx="${cx}" cy="${cy}" r="${r*k}" fill="#22D3EE22" stroke="#22D3EE" stroke-width="2"/><path d="M${cx} ${cy}L${P[0]} ${P[1]}" stroke="#fff" stroke-width="1" stroke-dasharray="3 4" opacity=".6"/><path d="M${cx} ${cy}L${T1[0]} ${T1[1]}M${cx} ${cy}L${T2[0]} ${T2[1]}" stroke="#fff" stroke-width="1.6"/><path d="M${P[0]} ${P[1]}L${T1[0]} ${T1[1]}M${P[0]} ${P[1]}L${T2[0]} ${T2[1]}" stroke="#FF5C8A" stroke-width="3.5" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3" fill="#fff"/><circle cx="${T1[0]}" cy="${T1[1]}" r="4" fill="#FFB547"/><circle cx="${T2[0]}" cy="${T2[1]}" r="4" fill="#FFB547"/><circle cx="${P[0]}" cy="${P[1]}" r="9" fill="#FF5C8A" stroke="#fff" stroke-width="2"/><text x="${cx-14}" y="${cy+16}">O</text><text x="${T1[0]+6}" y="${T1[1]-6}">T₁</text><text x="${T2[0]+6}" y="${T2[1]+14}">T₂</text><text x="${P[0]+(P[0]<cx?-24:12)}" y="${P[1]-12}" style="fill:#FF5C8A">P</text>`;
+ $('#lout').innerHTML='<div>PT₁<b>'+fmt(p1)+' cm</b></div><div>PT₂<b>'+fmt(p2)+' cm</b></div><div>∠OT₁P<b>'+fmt(ot)+'°</b></div><div>√(d² − r²)<b>'+fmt(Math.sqrt(d*d-r*r))+'</b></div>';
+ LCUR=[fmt(d)+' cm',fmt(p1),fmt(p2),fmt(ot)+'°',fmt(Math.sqrt(d*d-r*r))]}
+function lab4Draw(){
+ const a=+$('#lta').value,b=+$('#ltb').value,c=Math.hypot(a,b),ri=(a+b-c)/2,R=c/2,k=11,ox=85,oy=205,X=x=>ox+x*k,Y=y=>oy-y*k;
+ $('#ltav').textContent=a;$('#ltbv').textContent=b;
+ $('#lsvg').innerHTML=`<circle cx="${X(a/2)}" cy="${Y(b/2)}" r="${R*k}" fill="#22D3EE14" stroke="#22D3EE" stroke-width="2" stroke-dasharray="6 4"/><path d="M${X(0)} ${Y(0)}L${X(a)} ${Y(0)}L${X(0)} ${Y(b)}Z" fill="#7C5CFF22" stroke="#fff" stroke-width="2"/><circle cx="${X(ri)}" cy="${Y(ri)}" r="${ri*k}" fill="#FFB54733" stroke="#FFB547" stroke-width="2"/><path d="M${X(0)+9} ${Y(0)}V${Y(0)-9}H${X(0)}" stroke="#fff" stroke-width="1.2" fill="none"/><circle cx="${X(ri)}" cy="${Y(ri)}" r="2.5" fill="#FFB547"/><circle cx="${X(a/2)}" cy="${Y(b/2)}" r="2.5" fill="#22D3EE"/><text x="${X(0)-14}" y="${Y(0)+16}">A</text><text x="${X(a)+6}" y="${Y(0)+16}">B</text><text x="${X(0)-14}" y="${Y(b)-4}">C</text>`;
+ $('#lout').innerHTML='<div>Sisi miring c<b>'+fmt(c)+'</b></div><div>r dalam<b>'+fmt(ri)+'</b></div><div>R luar<b>'+fmt(R)+'</b></div>';
+ LCUR=[a,b,fmt(c),fmt(ri),fmt(R)]}
+
+const CITY={'Medan':[3.6,98.7],'Jakarta':[-6.2,106.8],'Tokyo':[35.7,139.7],'Sydney':[-33.9,151.2],'London':[51.5,-0.1],'New York':[40.7,-74],'Kairo':[30,31.2],'Rio de Janeiro':[-22.9,-43.2],'Cape Town':[-33.9,18.4],'Los Angeles':[34.1,-118.2],'Quito':[-0.2,-78.5]};
+const v3=(la,lo)=>{la*=D2R;lo*=D2R;return[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)]};
+function lab5Draw(){
+ const n1=$('#ls1').value,n2=$('#ls2').value,A=CITY[n1],B=CITY[n2],a=v3(...A),b=v3(...B);
+ const dot=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),th=Math.acos(dot)/D2R,km=th/360*2*Math.PI*6371;
+ let m=[a[0]+b[0],a[1]+b[1],a[2]+b[2]];const ml=Math.hypot(...m);
+ if(ml<1e-6)m=[-a[1],a[0],0];else m=m.map(x=>x/ml);
+ const la0=Math.asin(m[2]),lo0=Math.atan2(m[1],m[0]),R=100,cx=150,cy=125;
+ const P=(la,lo)=>{la*=D2R;lo*=D2R;const dl=lo-lo0,z=Math.sin(la0)*Math.sin(la)+Math.cos(la0)*Math.cos(la)*Math.cos(dl);return[cx+R*Math.cos(la)*Math.sin(dl),cy-R*(Math.cos(la0)*Math.sin(la)-Math.sin(la0)*Math.cos(la)*Math.cos(dl)),z]};
+ let g='';
+ for(let la=-60;la<=60;la+=30){let d='',on=false;for(let lo=-180;lo<=180;lo+=5){const q=P(la,lo);if(q[2]>=0){d+=(on?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1);on=true}else on=false}g+=`<path d="${d}" fill="none" stroke="#fff" stroke-opacity="${la==0?.55:.22}" stroke-width="${la==0?1.6:1}"/>`}
+ for(let lo=-180;lo<180;lo+=30){let d='',on=false;for(let la=-90;la<=90;la+=5){const q=P(la,lo);if(q[2]>=0){d+=(on?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1);on=true}else on=false}g+=`<path d="${d}" fill="none" stroke="#fff" stroke-opacity=".22"/>`}
+ let arc='';const th0=Math.acos(dot);
+ if(th0>1e-4){const s=Math.sin(th0);for(let i=0;i<=40;i++){const t=i/40,k1=Math.sin((1-t)*th0)/s,k2=Math.sin(t*th0)/s,x=k1*a[0]+k2*b[0],y=k1*a[1]+k2*b[1],z=k1*a[2]+k2*b[2];const q=P(Math.asin(z)/D2R,Math.atan2(y,x)/D2R);arc+=(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)}}
+ const pa=P(...A),pb=P(...B);
+ $('#lsvg').innerHTML=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="#0E6BA8" fill-opacity=".55" stroke="#22D3EE" stroke-width="2"/>${g}<path d="${arc}" fill="none" stroke="#FF5C8A" stroke-width="3.5" stroke-linecap="round"/><circle cx="${pa[0]}" cy="${pa[1]}" r="5" fill="#FFB547" stroke="#fff"/><circle cx="${pb[0]}" cy="${pb[1]}" r="5" fill="#FFB547" stroke="#fff"/><text x="${pa[0]+7}" y="${pa[1]-7}" style="font-size:11px">${n1}</text><text x="${pb[0]+7}" y="${pb[1]-7}" style="font-size:11px">${n2}</text>`;
+ const f=v=>Math.abs(v).toFixed(1).replace('.',',');const ll=c=>f(c[0])+'° '+(c[0]>=0?'LU':'LS')+', '+f(c[1])+'° '+(c[1]>=0?'BT':'BB');
+ if(n1==n2){$('#lout').innerHTML='<div>Pilih dua kota yang berbeda.</div>';LCUR=null;return}
+ $('#lout').innerHTML='<div>'+n1+'<b>'+ll(A)+'</b></div><div>'+n2+'<b>'+ll(B)+'</b></div><div>Sudut pusat θ<b>'+fmt(Math.round(th*10)/10)+'°</b></div><div>Jarak = θ/360° × 2π × 6.371<b>'+fmt(Math.round(km))+' km</b></div>';
+ LCUR=[n1,n2,fmt(Math.round(th*10)/10)+'°',fmt(Math.round(km))]}
+const LABS=[
+{n:'🔭 Lab 1: Sudut pusat dan keliling',goal:'Menemukan hubungan sudut pusat dan sudut keliling yang menghadap busur yang sama.',
+ steps:['Atur sudut pusat ∠AOB dengan penggeser.','Seret titik P ke beberapa posisi di busur besar.','Tekan Catat data minimal 3 kali, lalu coba juga P di busur kecil (garis merah).','Bandingkan kolom ∠AOB dan ∠APB, lalu jawab kesimpulan.'],
+ ctl:'<label for="lth">Sudut pusat ∠AOB: <span id="lthv"></span>°</label><input type="range" id="lth" min="40" max="160" step="5" value="100"><label for="lph">Posisi titik P: <span id="lphv"></span>°</label><input type="range" id="lph" min="0" max="359" value="180"><p class="mute">Seret titik P pada gambar, atau gunakan penggeser.</p>',
+ cols:['Posisi P','∠AOB','∠APB','∠AOB : ∠APB'],
+ init(){['lth','lph'].forEach(i=>$('#'+i).addEventListener('input',lab1Draw));dragSvg($('#lsvg'),(x,y)=>{$('#lph').value=Math.round((Math.atan2(y-125,x-150)/D2R+360)%360);lab1Draw()});lab1Draw()},
+ q:{t:'Apa kesimpulan dari datamu? (Perhatikan baris saat P berada di busur besar.)',o:['∠AOB sama dengan ∠APB','∠AOB = 2 × ∠APB, jika P di busur besar','∠APB selalu 90°','∠AOB = ½ × ∠APB'],k:1,why:'Sudut pusat dua kali sudut keliling yang menghadap busur yang sama. Jika P di busur kecil, ∠APB = 180° − ½ × ∠AOB.'}},
+{n:'🍕 Lab 2: Pizza dan juring',goal:'Menemukan hubungan banyak potongan, sudut pusat, panjang busur, dan luas juring.',
+ steps:['Pilih jari-jari pizza.','Ubah jumlah potongan dan amati sudut tiap potong.','Catat data minimal 3 kali dengan jumlah potongan berbeda.','Perhatikan kolom jumlah luas, lalu jawab kesimpulan.'],
+ ctl:'<label for="pn">Jumlah potongan: <span id="pnv"></span></label><input type="range" id="pn" min="2" max="12" value="8"><label for="pr">Jari-jari pizza</label><select id="pr"><option value="7">7 cm</option><option value="14" selected>14 cm</option><option value="21">21 cm</option></select>',
+ cols:['n','θ','Busur','Luas juring','Jumlah luas'],
+ init(){['pn','pr'].forEach(i=>$('#'+i).addEventListener('input',lab2Draw));lab2Draw()},
+ q:{t:'Berapa jumlah luas semua potongan pizza?',o:['Sama dengan luas seluruh pizza','Lebih kecil dari luas pizza','Lebih besar dari luas pizza','Berubah-ubah tergantung jumlah potongan'],k:0,why:'Semua juring menyusun satu lingkaran penuh, sehingga jumlah luasnya sama dengan πr², berapa pun jumlah potongannya.'}},
+{n:'📏 Lab 3: Garis singgung',goal:'Menemukan sifat dua garis singgung dari satu titik di luar lingkaran.',
+ steps:['Seret titik P ke beberapa jarak dan arah (jari-jari lingkaran 4 cm).','Catat data minimal 3 kali.','Bandingkan PT₁ dengan PT₂, dan lihat besar ∠OT₁P.','Cocokkan dengan kolom √(d² − r²), lalu jawab kesimpulan.'],
+ ctl:'<label for="ld">Jarak P ke pusat d: <span id="ldv"></span> cm</label><input type="range" id="ld" min="5" max="17" step="0.5" value="10"><label for="la">Arah titik P: <span id="lav"></span>°</label><input type="range" id="la" min="0" max="359" value="0"><p class="mute">Seret titik P pada gambar, atau gunakan penggeser.</p>',
+ cols:['d','PT₁','PT₂','∠OT₁P','√(d²−r²)'],
+ init(){['ld','la'].forEach(i=>$('#'+i).addEventListener('input',lab3Draw));dragSvg($('#lsvg'),(x,y)=>{const dx=x-150,dy=y-125;$('#ld').value=Math.max(5,Math.min(17,Math.round(Math.hypot(dx,dy)/7*2)/2));$('#la').value=Math.round((Math.atan2(dy,dx)/D2R+360)%360);lab3Draw()});lab3Draw()},
+ q:{t:'Apa yang kamu temukan tentang dua garis singgung dari titik P?',o:['Panjangnya sama dan tegak lurus jari-jari di titik singgung','Panjangnya berbeda','Sejajar dengan jari-jari','Panjangnya selalu sama dengan d'],k:0,why:'Dua garis singgung dari satu titik luar sama panjang, dan masing-masing tegak lurus jari-jari di titik singgung (90°). Panjangnya √(d² − r²).'}},
+{n:'📐 Lab 4: Lingkaran dalam dan luar segitiga',goal:'Menemukan jari-jari lingkaran dalam dan lingkaran luar pada segitiga siku-siku.',
+ steps:['Atur panjang sisi a dan b.','Amati lingkaran luar (garis putus-putus) dan lingkaran dalam (kuning).','Catat data minimal 3 kali dengan ukuran berbeda.','Bandingkan R luar dengan sisi miring c, lalu jawab kesimpulan.'],
+ ctl:'<label for="lta">Sisi a: <span id="ltav"></span> cm</label><input type="range" id="lta" min="3" max="12" value="6"><label for="ltb" style="margin-top:8px">Sisi b: <span id="ltbv"></span> cm</label><input type="range" id="ltb" min="3" max="12" value="8">',
+ cols:['a','b','c','r dalam','R luar'],
+ init(){['lta','ltb'].forEach(i=>$('#'+i).addEventListener('input',lab4Draw));lab4Draw()},
+ q:{t:'Apa hubungan jari-jari lingkaran luar (R) dengan sisi miring (c)?',o:['R = c : 2','R = c','R = 2c','R = a + b'],k:0,why:'Sisi miring segitiga siku-siku adalah diameter lingkaran luarnya, jadi R = c : 2. Jari-jari lingkaran dalam r = (a + b − c) : 2.'}}
+,{n:'🌍 Lab 5: Jarak di permukaan Bumi',goal:'Menghitung jarak dua kota di permukaan Bumi sebagai panjang busur lingkaran besar (R = 6.371 km).',
+ steps:['Pilih dua kota yang berbeda.','Amati garis merah: busur lingkaran besar yang menghubungkan kedua kota.','Catat data minimal 3 kali dengan pasangan kota berbeda.','Perhatikan kolom θ dan jarak, lalu jawab kesimpulan.'],
+ ctl:'<label for="ls1">Kota asal</label><select id="ls1">'+Object.keys(CITY).map(c=>'<option'+(c=='Medan'?' selected':'')+'>'+c+'</option>').join('')+'</select><label for="ls2">Kota tujuan</label><select id="ls2">'+Object.keys(CITY).map(c=>'<option'+(c=='Tokyo'?' selected':'')+'>'+c+'</option>').join('')+'</select>',
+ cols:['Asal','Tujuan','θ','Jarak (km)'],
+ init(){['ls1','ls2'].forEach(i=>$('#'+i).addEventListener('input',lab5Draw));lab5Draw()},
+ q:{t:'Bagaimana jarak terpendek dua kota di permukaan Bumi dihitung?',o:['Panjang busur lingkaran besar: θ/360° × 2πR','Selisih lintang dikali selisih bujur','Panjang tali busur yang menembus Bumi','Selalu sama dengan selisih bujur × 111 km'],k:0,why:'Jarak terpendek di permukaan bola adalah panjang busur lingkaran besar yang melalui kedua kota. Jaraknya θ/360° × 2πR, dengan θ sudut pusat di pusat Bumi.'}}];
+function lTable(){const L=LABS[LB];$('#ltab').innerHTML='<tr>'+L.cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>'+(LROWS.length?LROWS.map(r=>'<tr>'+r.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="'+L.cols.length+'" class="mute">Belum ada data. Tekan Catat data.</td></tr>')}
+function lConc(){
+ const L=LABS[LB],c=$('#lq'),done=gs.has('L'+LB);
+ if(LROWS.length<3&&!done){c.innerHTML='<h2>🧠 Kesimpulan</h2><p class="mute">Catat minimal 3 data untuk membuka pertanyaan kesimpulan ('+LROWS.length+'/3).</p>';return}
+ c.innerHTML='<h2>🧠 Kesimpulan'+(done?' ✅':'')+'</h2><p class="q">'+L.q.t+'</p><div id="lo"></div><div id="lfb"></div>';
+ const bs=[];L.q.o.forEach((t,j)=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=String.fromCharCode(65+j)+'. '+t;
+  b.onclick=()=>{bs.forEach(x=>{x.disabled=true});const ok=j==L.q.k;bs[L.q.k].classList.add('ok');if(!ok)b.classList.add('bad');
+   const m=cheer(ok);if(ok){if(!gs.has('L'+LB))riw('Lab maya',L.n.replace(/^\S+\s/,'')+' selesai',100);award('L'+LB)}
+   $('#lfb').innerHTML='<div class="fb '+(ok?'ok':'bad')+'"><b>'+m+'</b> '+L.q.why+'</div>'+(ok?'':'<p><button class="btn alt" id="lretry" type="button">Coba lagi</button></p>');
+   if(!ok)$('#lretry').onclick=lConc};
+  bs.push(b);$('#lo').appendChild(b)})}
+function labRender(i){
+ LB=i;LROWS=[];LCUR=null;const L=LABS[i];
+ Array.from($('#lseg').children).forEach((b,j)=>b.setAttribute('aria-pressed',j==i));
+ $('#labBody').innerHTML='<div class="card"><h2>'+L.n+'</h2><p><b>Tujuan:</b> '+L.goal+'</p><ol class="lsteps">'+L.steps.map(x=>'<li>'+x+'</li>').join('')+'</ol></div><div class="card"><svg id="lsvg" viewBox="0 0 300 250" class="sim lab" role="img" aria-label="'+L.n+'"></svg><div class="lctl">'+L.ctl+'</div><div class="res" id="lout"></div><div class="row" style="margin-top:10px"><button class="btn" id="lrec" type="button">📝 Catat data</button><button class="btn alt" id="lclr" type="button">Hapus tabel</button></div><div style="overflow-x:auto"><table class="ltab" id="ltab"></table></div></div><div class="card" id="lq"></div>';
+ L.init();lTable();lConc();
+ $('#lrec').onclick=()=>{if(!LCUR){toast('Geser dulu agar ada data yang valid');return}LROWS.push(LCUR.slice());if(LROWS.length>8)LROWS.shift();lTable();toast('Data dicatat ('+LROWS.length+')');if(LROWS.length<=3)lConc()};
+ $('#lclr').onclick=()=>{LROWS=[];lTable();lConc()}}
+LABS.forEach((L,i)=>{const b=document.createElement('button');b.type='button';b.textContent=L.n.split(':')[0].replace(/^\S+\s/,'')+' '+L.n.split(' ')[0];b.setAttribute('aria-pressed',i==0);b.onclick=()=>labRender(i);$('#lseg').appendChild(b)});
+labRender(0);
+
+renderGarden(-1);
+</script>
+</body>
+</html>
+
+</body></html>
